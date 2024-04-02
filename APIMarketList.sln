@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIMarketList", "APIMarketList\APIMarketList.csproj", "{46038850-EEE6-4F67-A750-C4E1CF8BE7C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIMarketList", "APIMarketList\APIMarketList.csproj", "{46038850-EEE6-4F67-A750-C4E1CF8BE7C7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Domain", "1-Domain", "{E3371A61-CBD6-452F-A6A0-87F6580D2551}"
 EndProject
@@ -15,9 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Application", "4-Applicat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5-API", "5-API", "{7DE8BE67-E5CE-4F34-8029-4239B23FD22F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIMarketList.Domain", "APIMarketList.Domain\APIMarketList.Domain.csproj", "{1402147D-600E-4B3F-B588-D8558E761224}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIMarketList.Domain", "APIMarketList.Domain\APIMarketList.Domain.csproj", "{1402147D-600E-4B3F-B588-D8558E761224}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIMarketList.Infra", "APIMarketList.Infra\APIMarketList.Infra.csproj", "{6FBAD6EE-80C1-43F7-9DA0-7932E8A40FE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIMarketList.Infra.Data", "APIMarketList.Infra\APIMarketList.Infra.Data.csproj", "{6FBAD6EE-80C1-43F7-9DA0-7932E8A40FE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIMarketList.Infra.CrossCutting", "APIMarketList.CrossCutting\APIMarketList.Infra.CrossCutting.csproj", "{E04574FB-0A49-4A8C-AC44-193D781B364B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{6FBAD6EE-80C1-43F7-9DA0-7932E8A40FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FBAD6EE-80C1-43F7-9DA0-7932E8A40FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FBAD6EE-80C1-43F7-9DA0-7932E8A40FE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E04574FB-0A49-4A8C-AC44-193D781B364B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E04574FB-0A49-4A8C-AC44-193D781B364B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E04574FB-0A49-4A8C-AC44-193D781B364B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E04574FB-0A49-4A8C-AC44-193D781B364B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +51,7 @@ Global
 		{46038850-EEE6-4F67-A750-C4E1CF8BE7C7} = {7DE8BE67-E5CE-4F34-8029-4239B23FD22F}
 		{1402147D-600E-4B3F-B588-D8558E761224} = {E3371A61-CBD6-452F-A6A0-87F6580D2551}
 		{6FBAD6EE-80C1-43F7-9DA0-7932E8A40FE3} = {6C223D57-79CD-486C-99D8-E0E8C7C0323B}
+		{E04574FB-0A49-4A8C-AC44-193D781B364B} = {6C223D57-79CD-486C-99D8-E0E8C7C0323B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A79097EC-872E-44C4-AD51-C4C3C67DD429}

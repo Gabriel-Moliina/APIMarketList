@@ -7,6 +7,6 @@ namespace APIMarketList.Domain.Entities
         public string Name { get; set; }
         public decimal Price { get; set; }
 
-        public ICollection<UserShopping> UserShoppings { get; set; }
+        public ICollection<ProductShopping> ProductShoppings { get; set; }
     }
 }

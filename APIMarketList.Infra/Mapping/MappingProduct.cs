@@ -2,12 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace APIMarketList.Infra.Mapping
+namespace APIMarketList.Infra.Data.Mapping
 {
     public class MappingProduct : IEntityTypeConfiguration<Product>
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
+            builder.ToTable("Product");
+
             builder.Property(p => p.Id);
             builder.HasKey(p => p.Id).HasName("Id");
 
@@ -15,7 +17,7 @@ namespace APIMarketList.Infra.Mapping
                 .HasColumnType("decimal(10,2)");
 
             builder.Property(p => p.Name)
-                .HasColumnType("varchar(80)");
+                .HasColumnType("varchar(150)");
 
             builder.Property(p => p.IncludedDate)
                 .HasColumnType("datetime");

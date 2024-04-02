@@ -8,6 +8,6 @@ namespace APIMarketList.Domain.Entities
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public ICollection<UserShopping> UserShoppings { get; set; }
+        public ICollection<Shopping> Shoppings { get; set; }
     }
 }

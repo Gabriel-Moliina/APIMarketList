@@ -1,10 +1,11 @@
 ﻿using APIMarketList.Domain.Entities;
-using APIMarketList.Infra.Mapping;
+using APIMarketList.Infra.Data.Mapping;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
-namespace APIMarketList.Infra.Context
+namespace APIMarketList.Infra.Data.Context
 {
-    internal class EntityContext : DbContext
+    public class EntityContext : DbContext
     {
         public EntityContext(DbContextOptions options) : base(options)
         {
@@ -13,12 +14,13 @@ namespace APIMarketList.Infra.Context
         public Product Products { get; set; }
         public Shopping Shoppings { get; set; }
         public User Users { get; set; }
-        public UserShopping UserShoppings { get; set; }
+        public ProductShopping UserShoppings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new MappingProduct());  
-            modelBuilder.ApplyConfiguration(new MappingShopping());  
+            modelBuilder.ApplyConfiguration(new MappingProduct());
+            modelBuilder.ApplyConfiguration(new MappingShopping());
+            modelBuilder.ApplyConfiguration(new MappingUser());
         }
     }
 }
