@@ -7,7 +7,7 @@ namespace APIMarketList.Infra.CrossCutting.Services
 {
     public static class RegistryDbContext
     {
-        public static void RegisterDbContext(this IServiceCollection services, IConfiguration configuration)
+        public static void DbContextDepdency(this IServiceCollection services, IConfiguration configuration)
         {
             string connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<EntityContext>(options =>

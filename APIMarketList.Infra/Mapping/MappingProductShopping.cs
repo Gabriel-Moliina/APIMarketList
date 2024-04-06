@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace APIMarketList.Infra.Data.Mapping
 {
-    public class MappingUserShopping : IEntityTypeConfiguration<ProductShopping>
+    public class MappingProductShopping : IEntityTypeConfiguration<ProductShopping>
     {
         public void Configure(EntityTypeBuilder<ProductShopping> builder)
         {
-            builder.ToTable("UserShopping");
+            builder.ToTable("ProductShopping");
             builder.Property(p => p.Id);
 
             builder.HasKey(p => p.Id).HasName("Id");

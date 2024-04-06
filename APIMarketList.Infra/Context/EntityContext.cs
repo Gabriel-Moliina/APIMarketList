@@ -1,7 +1,6 @@
 ﻿using APIMarketList.Domain.Entities;
 using APIMarketList.Infra.Data.Mapping;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace APIMarketList.Infra.Data.Context
 {
@@ -14,7 +13,7 @@ namespace APIMarketList.Infra.Data.Context
         public Product Products { get; set; }
         public Shopping Shoppings { get; set; }
         public User Users { get; set; }
-        public ProductShopping UserShoppings { get; set; }
+        public ProductShopping ProductShoppings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

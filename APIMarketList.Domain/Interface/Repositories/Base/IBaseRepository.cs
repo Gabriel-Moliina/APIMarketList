@@ -1,6 +1,9 @@
-﻿namespace APIMarketList.Domain.Interface.Repositories.Base
+﻿using APIMarketList.Domain.Interface.Entities;
+
+namespace APIMarketList.Domain.Interface.Repositories.Base
 {
-    public interface IBaseRepository
+    public interface IBaseRepository<TEntity> where TEntity : class
     {
+
     }
 }
