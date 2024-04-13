@@ -3,7 +3,7 @@ using APIMarketList.Domain.Entities;
 
 namespace APIMarketList.Application.Interface
 {
-    public interface IUserApplication : IBaseApplication<User>
+    public interface IUserApplication : IBaseApplication
     {
     }
 }
