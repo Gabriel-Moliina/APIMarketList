@@ -21,7 +21,7 @@ namespace APIMarketList.Infra.Data.UnitOfWork
             {
                 if (User == null)
                 {
-                    User = new UserRepository();
+                    User = new UserRepository(_context);
                 }
                 return User;
             }
@@ -33,7 +33,7 @@ namespace APIMarketList.Infra.Data.UnitOfWork
             {
                 if (Product == null)
                 {
-                    Product = new ProductRepository();
+                    Product = new ProductRepository(_context);
                 }
                 return Product;
             }
@@ -45,7 +45,7 @@ namespace APIMarketList.Infra.Data.UnitOfWork
             {
                 if (ProductShopping == null)
                 {
-                    ProductShopping = new ProductShoppingRepository();
+                    ProductShopping = new ProductShoppingRepository(_context);
                 }
                 return ProductShopping;
             }
@@ -57,7 +57,7 @@ namespace APIMarketList.Infra.Data.UnitOfWork
             {
                 if (Shopping == null)
                 {
-                    Shopping = new ShoppingRepository();
+                    Shopping = new ShoppingRepository(_context);
                 }
                 return Shopping;
             }

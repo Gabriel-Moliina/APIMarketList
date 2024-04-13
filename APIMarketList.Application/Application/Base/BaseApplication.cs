@@ -3,7 +3,7 @@ using APIMarketList.Domain.Interface.Entities;
 
 namespace APIMarketList.Application.Application.Base
 {
-    public class BaseApplication : IBaseApplication<TEntity>
+    public class BaseApplication : IBaseApplication
     {
     }
 }

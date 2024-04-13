@@ -1,19 +1,17 @@
 ﻿using APIMarketList.Domain.Interface.Services;
 using Microsoft.AspNetCore.Mvc;
 
-
 namespace APIMarketList.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class ProductController : ControllerBase
     {
-        private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly IProductService _productService;
+        public ProductController(IProductService productService)
         {
-            _userService = userService;
+            _productService = productService;
         }
-
         [HttpGet]
         public IEnumerable<string> Get()
         {

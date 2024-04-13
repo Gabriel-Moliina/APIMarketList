@@ -1,4 +1,5 @@
 ﻿using APIMarketList.Application.Interface;
+using APIMarketList.Domain.DTO;
 using APIMarketList.Domain.Entities;
 using APIMarketList.Domain.Interface.Services;
 using System.Transactions;
@@ -13,14 +14,6 @@ namespace APIMarketList.Services.Services
             _productApplication = productApplication;
         }
         
-        public Task<IList<Product>> Get()
-        {
-            using var transaction = new TransactionScope();
-            var response = _productApplication.get
-        }
-        public Product Get(int id)
-        {
-
-        }
+        public async Task<IList<ProductDTO>> Get() => await _productApplication.GetProductsAsync();
     }
 }

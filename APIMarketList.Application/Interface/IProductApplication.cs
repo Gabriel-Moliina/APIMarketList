@@ -1,9 +1,10 @@
 ﻿using APIMarketList.Application.Interface.Base;
-using APIMarketList.Domain.Entities;
+using APIMarketList.Domain.DTO;
 
 namespace APIMarketList.Application.Interface
 {
-    public interface IProductApplication : IBaseApplication<Product>
+    public interface IProductApplication : IBaseApplication
     {
+        Task<List<ProductDTO>> GetProductsAsync();
     }
 }
