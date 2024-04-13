@@ -1,11 +1,12 @@
-﻿using APIMarketList.Domain.Interface.Entities;
+﻿using APIMarketList.Domain.Entities.Base;
+using APIMarketList.Domain.Interface.Entities;
 using APIMarketList.Domain.Interface.Repositories.Base;
 using APIMarketList.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace APIMarketList.Infra.Data.Repositories.Base
 {
-    public class BaseRepository : IBaseRepository<TEntity>
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         protected readonly EntityContext _context;
         protected readonly DbSet<TEntity> _dbSet;
@@ -27,10 +28,9 @@ namespace APIMarketList.Infra.Data.Repositories.Base
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<TEntity?> GetById(int id)
-        {
-            return await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
-        }
+        public async Task<TEntity?> Get(int id) => await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
+
+        public async Task<IList<TEntity>> Get() => await _dbSet.ToListAsync();
 
         public async Task<int> UpdateAsync(TEntity entity)
         {

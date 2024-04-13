@@ -1,8 +1,14 @@
-﻿using APIMarketList.Domain.Interface.Repositories;
+﻿using APIMarketList.Domain.Entities;
+using APIMarketList.Domain.Interface.Repositories;
+using APIMarketList.Infra.Data.Context;
+using APIMarketList.Infra.Data.Repositories.Base;
 
 namespace APIMarketList.Infra.Data.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
+        public ProductRepository(EntityContext context) : base(context)
+        {
+        }
     }
 }

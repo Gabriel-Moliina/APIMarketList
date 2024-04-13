@@ -1,6 +1,14 @@
-﻿namespace APIMarketList.Services.Services
+﻿using APIMarketList.Application.Interface;
+using APIMarketList.Domain.Interface.Services;
+
+namespace APIMarketList.Services.Services
 {
-    internal class UserService
+    public class UserService : IUserService
     {
+        private readonly IUserApplication _userApplication;
+        public UserService(IUserApplication userApplication)
+        {
+            _userApplication = userApplication;
+        }
     }
 }

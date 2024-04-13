@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\APIMarketList.Application\APIMarketList.Application.csproj" />
+  </ItemGroup>
+
 </Project>
