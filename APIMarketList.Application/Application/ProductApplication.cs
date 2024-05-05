@@ -1,23 +1,23 @@
 ﻿using APIMarketList.Application.Application.Base;
 using APIMarketList.Application.Interface;
 using APIMarketList.Domain.DTO;
-using APIMarketList.Domain.Interface.UnitOfWork;
+using APIMarketList.Domain.Interface.Repositories;
 using System.Transactions;
 
 namespace APIMarketList.Application.Application
 {
     public class ProductApplication : BaseApplication, IProductApplication
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public ProductApplication(IUnitOfWork unitOfWork)
+        private readonly IProductRepository _productRepository;
+        public ProductApplication(IProductRepository productRepository)
         {
-            _unitOfWork = unitOfWork;
+            _productRepository = productRepository;
         }
 
         public async Task<List<ProductDTO>> GetProductsAsync()
         {
             using var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
-            var response = await _unitOfWork.Product.GetProductsAsync();
+            var response = await _productRepository.GetProductsAsync();
             transaction.Complete();
             return response;
         }

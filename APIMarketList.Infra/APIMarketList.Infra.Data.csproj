@@ -29,4 +29,8 @@
     <ProjectReference Include="..\APIMarketList.Domain\APIMarketList.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UnitOfWork\" />
+  </ItemGroup>
+
 </Project>

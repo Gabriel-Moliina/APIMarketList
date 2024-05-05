@@ -1,11 +1,13 @@
-﻿using APIMarketList.Domain.Interface.Services;
+﻿using APIMarketList.Domain.DTO;
+using APIMarketList.Domain.Interface.Services;
+using APIMarketList.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIMarketList.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductController : BaseController
     {
         private readonly IProductService _productService;
         public ProductController(IProductService productService)
@@ -13,9 +15,9 @@ namespace APIMarketList.Controllers
             _productService = productService;
         }
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<ResponseViewModel<IList<ProductDTO>>>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await ExecuteResponseAsync(() => _productService.Get());
         }
 
         [HttpGet("{id}")]
