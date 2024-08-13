@@ -3,7 +3,7 @@ using APIMarketList.Domain.Interface.Repositories.Base;
 
 namespace APIMarketList.Domain.Interface.Repositories
 {
-    public interface IProductShoppingRepository : IBaseRepository<ProductShopping>
+    public interface IShoppingListRepository : IBaseRepository<ShoppingList>
     {
     }
 }

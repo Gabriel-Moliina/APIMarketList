@@ -4,23 +4,17 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace APIMarketList.Infra.Data.Mapping
 {
-    public class MappingProduct : IEntityTypeConfiguration<Product>
+    public class MappingGroup : IEntityTypeConfiguration<Group>
     {
-        public void Configure(EntityTypeBuilder<Product> builder)
+        public void Configure(EntityTypeBuilder<Group> builder)
         {
-            builder.ToTable("Product");
+            builder.ToTable("Group");
 
             builder.Property(p => p.Id);
             builder.HasKey(p => p.Id).HasName("Id");
 
-            builder.Property(p => p.Price)
-                .HasColumnType("decimal(10,2)");
-
-            builder.Property(p => p.Name)
-                .HasColumnType("varchar(150)");
-            
-            builder.Property(p => p.Code)
-                .HasColumnType("varchar(150)");
+            builder.Property(p => p.Description)
+                .HasColumnType("varchar(255)");
 
             builder.Property(p => p.IncludedDate)
                 .HasColumnType("datetime");

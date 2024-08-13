@@ -5,9 +5,9 @@ using APIMarketList.Infra.Data.Repositories.Base;
 
 namespace APIMarketList.Infra.Data.Repositories
 {
-    public class ProductShoppingRepository : BaseRepository<ProductShopping>, IProductShoppingRepository
+    public class ShoppingListRepository : BaseRepository<ShoppingList>, IShoppingListRepository
     {
-        public ProductShoppingRepository(EntityContext context) : base(context)
+        public ShoppingListRepository(EntityContext context) : base(context)
         {
         }
     }

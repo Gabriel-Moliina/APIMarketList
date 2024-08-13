@@ -14,16 +14,16 @@ namespace APIMarketList.Infra.CrossCutting.Services
         public static void RegistryDepedency(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IShoppingListService, ShoppingListService>();
             services.AddScoped<IProductService, ProductService>();
 
             services.AddScoped<IUserApplication, UserApplication>();
             services.AddScoped<IProductApplication, ProductApplication>();
-            services.AddScoped<IShoppingApplication, ShoppingApplication>();
+            services.AddScoped<IShoppingListApplication, ShoppingListApplication>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IShoppingRepository, ShoppingRepository>();
-            services.AddScoped<IProductShoppingRepository, ProductShoppingRepository>();
+            services.AddScoped<IShoppingListRepository, ShoppingListRepository>();
 
             services.DbContextDepdency(configuration);
         }

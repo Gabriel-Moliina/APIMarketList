@@ -1,6 +1,6 @@
 ﻿namespace APIMarketList.Application.Interface
 {
-    public interface IShoppingApplication
+    public interface IShoppingListApplication
     {
     }
 }

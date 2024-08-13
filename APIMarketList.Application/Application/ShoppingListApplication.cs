@@ -3,9 +3,9 @@ using APIMarketList.Application.Interface;
 
 namespace APIMarketList.Application.Application
 {
-    public class UserApplication : BaseApplication, IUserApplication
+    public class ShoppingListApplication : BaseApplication, IShoppingListApplication
     {
-        public UserApplication()
+        public ShoppingListApplication()
         {
 
         }

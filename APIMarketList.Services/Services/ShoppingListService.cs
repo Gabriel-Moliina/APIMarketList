@@ -3,10 +3,10 @@ using APIMarketList.Domain.Interface.Services;
 
 namespace APIMarketList.Services.Services
 {
-    public class ShoppingService : IShoppingService
+    public class ShoppingListService : IShoppingListService
     {
-        private readonly IShoppingApplication _shoppingApplication;
-        public ShoppingService(IShoppingApplication shoppingApplication)
+        private readonly IShoppingListApplication _shoppingApplication;
+        public ShoppingListService(IShoppingListApplication shoppingApplication)
         {
             _shoppingApplication = shoppingApplication;
         }
