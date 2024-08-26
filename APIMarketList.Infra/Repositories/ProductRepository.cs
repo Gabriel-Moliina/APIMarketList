@@ -13,16 +13,24 @@ namespace APIMarketList.Infra.Data.Repositories
         {
         }
 
-        public Task<List<ProductDTO>> GetProductsAsync()
+        public async Task<List<ProductDTO>> GetProductsAsync()
         {
-            var query = (from product in _dbSet.AsQueryable()
-                         select new ProductDTO
-                         {
-                             Name = product.Name,
-                             Price = product.Price
-                         });
+            var entities = await Get();
+            return entities.Select(product => new ProductDTO
+            {
+                Name = product.Name,
+                Price = product.Price
+            }).ToList();
+        }
 
-            return query.ToListAsync();
+        public async Task<ProductDTO?> GetById(long id)
+        {
+            var product = await Get(id);
+            return new ProductDTO
+            {
+                Name = product?.Name,
+                Price = product?.Price
+            };
         }
     }
 }

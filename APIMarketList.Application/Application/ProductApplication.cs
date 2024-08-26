@@ -21,5 +21,13 @@ namespace APIMarketList.Application.Application
             transaction.Complete();
             return response;
         }
+
+        public async Task<ProductDTO?> GetById(long id)
+        {
+            using var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+            var response = await _productRepository.GetById(id);
+            transaction.Complete();
+            return response;
+        }
     }
 }

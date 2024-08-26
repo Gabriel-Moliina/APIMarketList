@@ -21,9 +21,9 @@ namespace APIMarketList.Controllers
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<ResponseViewModel<ProductDTO?>>> Get(long id)
         {
-            return "value";
+            return await ExecuteResponseAsync(() => _productService.Get(id));
         }
 
         [HttpPost]

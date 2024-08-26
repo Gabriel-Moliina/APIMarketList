@@ -28,7 +28,7 @@ namespace APIMarketList.Infra.Data.Repositories.Base
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<TEntity?> Get(int id) => await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<TEntity?> Get(long id) => await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<IList<TEntity>> Get() => await _dbSet.ToListAsync();
 

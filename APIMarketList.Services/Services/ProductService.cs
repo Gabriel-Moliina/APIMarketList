@@ -15,5 +15,6 @@ namespace APIMarketList.Services.Services
         }
         
         public async Task<IList<ProductDTO>> Get() => await _productApplication.GetProductsAsync();
+        public async Task<ProductDTO?> Get(long id) => await _productApplication.GetById(id);
     }
 }
