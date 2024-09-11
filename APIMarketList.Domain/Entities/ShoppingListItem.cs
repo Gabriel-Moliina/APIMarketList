@@ -9,8 +9,8 @@ namespace APIMarketList.Domain.Entities
             ShoppingPurchases = new HashSet<ShoppingPurchase>();
         }
         public int Amount { get; set; }
-        public long ProductId { get; set; }
-        public long ShoppingListId { get; set; }
+        public int ProductId { get; set; }
+        public int ShoppingListId { get; set; }
 
         public virtual Product? Product { get; set; }
         public virtual ShoppingList? ShoppingList { get; set; }

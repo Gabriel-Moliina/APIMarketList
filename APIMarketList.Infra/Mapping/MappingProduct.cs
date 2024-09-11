@@ -11,7 +11,6 @@ namespace APIMarketList.Infra.Data.Mapping
             builder.ToTable("Product");
 
             builder.Property(p => p.Id);
-            builder.HasKey(p => p.Id).HasName("Id");
 
             builder.Property(p => p.Price)
                 .HasColumnType("decimal(10,2)");

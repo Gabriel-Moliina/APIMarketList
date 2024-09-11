@@ -11,7 +11,7 @@ namespace APIMarketList.Infra.CrossCutting.Services
         {
             string connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<EntityContext>(options =>
-                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+                options.UseSqlServer(connectionString));
 
             using var serviceScope = services.BuildServiceProvider().CreateScope();
             serviceScope.ServiceProvider.GetRequiredService<EntityContext>().Database.EnsureCreated();

@@ -11,8 +11,6 @@ namespace APIMarketList.Infra.Data.Mapping
             builder.ToTable("ShoppingList");
             builder.Property(p => p.Id);
 
-            builder.HasKey(p => p.Id).HasName("Id");
-
             builder.Property(p => p.Description)
                 .HasColumnType("varchar(255)");
 
@@ -20,10 +18,10 @@ namespace APIMarketList.Infra.Data.Mapping
                 .HasColumnType("datetime");
 
             builder.Property(p => p.GroupId)
-                .HasColumnType("bigint(11)");
+                .HasColumnType("int");
 
             builder.Property(p => p.Status)
-                .HasColumnType("int(5)");
+                .HasColumnType("int");
 
             builder.HasOne(p => p.Group)
                 .WithMany(d => d.ShoppingLists)

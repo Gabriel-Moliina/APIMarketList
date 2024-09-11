@@ -11,10 +11,9 @@ namespace APIMarketList.Infra.Data.Mapping
             builder.ToTable("Member");
 
             builder.Property(p => p.Id);
-            builder.HasKey(p => p.Id).HasName("Id");
 
             builder.Property(p => p.IsAdmin)
-                .HasColumnType("tinyint(1)");
+                .HasColumnType("bit");
 
             builder.HasOne(p => p.Group)
                 .WithMany(d => d.Members)

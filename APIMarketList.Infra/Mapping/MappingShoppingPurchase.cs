@@ -11,10 +11,9 @@ namespace APIMarketList.Infra.Data.Mapping
             builder.ToTable("ShoppingPurchase");
 
             builder.Property(p => p.Id);
-            builder.HasKey(p => p.Id).HasName("Id");
 
             builder.Property(p => p.QuantityPurchased)
-                .HasColumnType("int(11)")
+                .HasColumnType("int")
                 .HasDefaultValue(0);
             
             builder.Property(p => p.PurchaseDate)

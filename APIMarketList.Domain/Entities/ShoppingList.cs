@@ -10,7 +10,7 @@ namespace APIMarketList.Domain.Entities
         }
         public string? Description { get; set; }
         public DateTime ListDate { get; set; }  
-        public long GroupId { get; set; }
+        public int GroupId { get; set; }
         public int Status { get; set; }
 
         public virtual Group? Group { get; set; }

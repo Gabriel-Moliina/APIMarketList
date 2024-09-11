@@ -6,7 +6,7 @@ namespace APIMarketList.Domain.Entities
     {
         public int QuantityPurchased { get; set; }
         public DateTime PurchaseDate { get; set; }
-        public long ShoppingListItemId { get; set; }
+        public int ShoppingListItemId { get; set; }
         public virtual ShoppingListItem? ShoppingListItem { get; set; }
     }
 }

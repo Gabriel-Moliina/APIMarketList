@@ -11,10 +11,9 @@ namespace APIMarketList.Infra.Data.Mapping
             builder.ToTable("ShoppingListItem");
 
             builder.Property(p => p.Id);
-            builder.HasKey(p => p.Id).HasName("Id");
 
             builder.Property(p => p.Amount)
-                .HasColumnType("int(11)");
+                .HasColumnType("int");
 
             builder.HasOne(p => p.Product)
                 .WithMany(d => d.ShoppingListItems)

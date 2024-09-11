@@ -11,7 +11,6 @@ namespace APIMarketList.Infra.Data.Mapping
             builder.ToTable("Group");
 
             builder.Property(p => p.Id);
-            builder.HasKey(p => p.Id).HasName("Id");
 
             builder.Property(p => p.Description)
                 .HasColumnType("varchar(255)");

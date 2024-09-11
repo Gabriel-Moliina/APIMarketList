@@ -17,7 +17,11 @@ namespace APIMarketList.Infra.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new MappingGroup());
+            modelBuilder.ApplyConfiguration(new MappingMember());
             modelBuilder.ApplyConfiguration(new MappingProduct());
+            modelBuilder.ApplyConfiguration(new MappingShoppingList());
+            modelBuilder.ApplyConfiguration(new MappingShoppingListItem());
             modelBuilder.ApplyConfiguration(new MappingShoppingPurchase());
             modelBuilder.ApplyConfiguration(new MappingUser());
         }
