@@ -17,6 +17,7 @@ namespace APIMarketList.Infra.Data.Repositories.Base
         }
         public async Task<TEntity> AddAsync(TEntity entity)
         {
+            FillDatesChange(entity);
             var newEntity = await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
             return newEntity.Entity;
@@ -34,8 +35,24 @@ namespace APIMarketList.Infra.Data.Repositories.Base
 
         public async Task<int> UpdateAsync(TEntity entity)
         {
+            FillDatesChange(entity);
             _dbSet.Update(entity);
             return await _context.SaveChangesAsync();
+        }
+        public async Task<TEntity> SaveOrUpdate(TEntity entity)
+        {
+            if (entity.Id == 0)
+                return await AddAsync(entity);
+
+            await UpdateAsync(entity);
+            return entity;
+        }
+
+        private void FillDatesChange(TEntity entity)
+        {
+            if(entity.Id == 0)
+                entity.IncludedDate = DateTime.Now;
+            entity.ModifiedDate = DateTime.Now;
         }
     }
 }

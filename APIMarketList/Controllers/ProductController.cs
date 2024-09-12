@@ -1,4 +1,4 @@
-﻿using APIMarketList.Domain.DTO;
+﻿using APIMarketList.Domain.DTO.Product;
 using APIMarketList.Domain.Interface.Services;
 using APIMarketList.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -26,14 +26,14 @@ namespace APIMarketList.Controllers
             return await ExecuteResponseAsync(() => _productService.Get(id));
         }
 
+        /// <summary>
+        /// Adiciona ou altera um produto.
+        /// </summary>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [ProducesResponseType(typeof(ProductSaveResponseDTO), 200)]
+        public async Task<ActionResult<ResponseViewModel<ProductSaveResponseDTO>>> SaveOrUpdate([FromBody] ProductSaveDTO productSave)
         {
-        }
-
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
+            return await ExecuteResponseAsync(() => _productService.SaveOrUpdate(productSave));
         }
 
         [HttpDelete("{id}")]

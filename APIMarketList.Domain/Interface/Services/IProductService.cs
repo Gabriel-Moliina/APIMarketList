@@ -1,4 +1,4 @@
-﻿using APIMarketList.Domain.DTO;
+﻿using APIMarketList.Domain.DTO.Product;
 
 namespace APIMarketList.Domain.Interface.Services
 {
@@ -6,5 +6,6 @@ namespace APIMarketList.Domain.Interface.Services
     {
         Task<IList<ProductDTO>> Get();
         Task<ProductDTO?> Get(long Id);
+        Task<ProductSaveResponseDTO> SaveOrUpdate(ProductSaveDTO productSave);
     }
 }

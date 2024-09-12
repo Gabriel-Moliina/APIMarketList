@@ -9,5 +9,6 @@ namespace APIMarketList.Domain.Interface.Repositories.Base
         Task<TEntity?> Get(long id);
         Task<IList<TEntity>> Get();
         Task<int> UpdateAsync(TEntity entity);
+        Task<TEntity> SaveOrUpdate(TEntity entity);
     }
 }

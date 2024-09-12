@@ -1,4 +1,4 @@
-﻿using APIMarketList.Domain.DTO;
+﻿using APIMarketList.Domain.DTO.Product;
 using APIMarketList.Domain.Entities;
 using APIMarketList.Domain.Interface.Repositories.Base;
 

@@ -1,4 +1,4 @@
-﻿namespace APIMarketList.Domain.DTO
+﻿namespace APIMarketList.Domain.DTO.Product
 {
     public class ProductDTO
     {

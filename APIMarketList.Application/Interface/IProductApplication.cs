@@ -1,5 +1,5 @@
 ﻿using APIMarketList.Application.Interface.Base;
-using APIMarketList.Domain.DTO;
+using APIMarketList.Domain.DTO.Product;
 
 namespace APIMarketList.Application.Interface
 {
@@ -7,5 +7,6 @@ namespace APIMarketList.Application.Interface
     {
         Task<List<ProductDTO>> GetProductsAsync();
         Task<ProductDTO?> GetById(long id);
+        Task<ProductSaveResponseDTO> SaveOrUpdate(ProductSaveDTO productSave);
     }
 }
