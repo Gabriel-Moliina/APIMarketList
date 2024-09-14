@@ -3,7 +3,6 @@
     public interface TEntity
     {
         int Id { get; set; }
-        public DateTime IncludedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
     }
 }

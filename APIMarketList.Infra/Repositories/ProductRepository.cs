@@ -12,25 +12,5 @@ namespace APIMarketList.Infra.Data.Repositories
         public ProductRepository(EntityContext context) : base(context)
         {
         }
-
-        public async Task<List<ProductDTO>> GetProductsAsync()
-        {
-            var entities = await Get();
-            return entities.Select(product => new ProductDTO
-            {
-                Name = product.Name,
-                Price = product.Price
-            }).ToList();
-        }
-
-        public async Task<ProductDTO?> GetById(long id)
-        {
-            var product = await Get(id);
-            return new ProductDTO
-            {
-                Name = product?.Name,
-                Price = product?.Price
-            };
-        }
     }
 }

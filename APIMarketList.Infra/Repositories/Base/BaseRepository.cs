@@ -1,4 +1,5 @@
-﻿using APIMarketList.Domain.Entities.Base;
+﻿using APIMarketList.Domain.Entities;
+using APIMarketList.Domain.Entities.Base;
 using APIMarketList.Domain.Interface.Entities;
 using APIMarketList.Domain.Interface.Repositories.Base;
 using APIMarketList.Infra.Data.Context;
@@ -51,7 +52,7 @@ namespace APIMarketList.Infra.Data.Repositories.Base
         private void FillDatesChange(TEntity entity)
         {
             if(entity.Id == 0)
-                entity.IncludedDate = DateTime.Now;
+                _context.Entry(entity).Property("IncludedDate").CurrentValue = DateTime.Now;
             entity.ModifiedDate = DateTime.Now;
         }
     }

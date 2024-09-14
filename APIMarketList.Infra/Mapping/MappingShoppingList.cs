@@ -27,7 +27,7 @@ namespace APIMarketList.Infra.Data.Mapping
                 .WithMany(d => d.ShoppingLists)
                 .HasForeignKey(p => p.GroupId);
 
-            builder.Property(p => p.IncludedDate)
+            builder.Property<DateTime>("IncludedDate")
             .   HasColumnType("datetime");
             builder.Property(p => p.ModifiedDate)
                 .HasColumnType("datetime");

@@ -22,7 +22,7 @@ namespace APIMarketList.Infra.Data.Mapping
                 .HasColumnType("varchar(50)");
 
 
-            builder.Property(p => p.IncludedDate)
+            builder.Property<DateTime>("IncludedDate")
                 .HasColumnType("datetime");
             builder.Property(p => p.ModifiedDate)
                 .HasColumnType("datetime");

@@ -7,5 +7,6 @@ namespace APIMarketList.Domain.Interface.Services
         Task<IList<ProductDTO>> Get();
         Task<ProductDTO?> Get(long Id);
         Task<ProductSaveResponseDTO> SaveOrUpdate(ProductSaveDTO productSave);
+        Task<int> Delete(int id);
     }
 }

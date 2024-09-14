@@ -2,6 +2,7 @@
 using APIMarketList.Application.Interface;
 using APIMarketList.Domain.DTO.Product;
 using APIMarketList.Domain.Entities;
+using APIMarketList.Domain.Interface.Entities;
 using APIMarketList.Domain.Interface.Repositories;
 using AutoMapper;
 using System.Transactions;
@@ -19,14 +20,20 @@ namespace APIMarketList.Application.Application
             _productRepository = productRepository;
         }
 
-        public async Task<List<ProductDTO>> GetProductsAsync() => await _productRepository.GetProductsAsync();
+        public async Task<List<ProductDTO>> GetProductsAsync() => _mapper.Map<List<ProductDTO>>(await _productRepository.Get());
 
-        public async Task<ProductDTO?> GetById(long id) => await _productRepository.GetById(id);
+        public async Task<ProductDTO?> GetById(long id) => _mapper.Map<ProductDTO>(await _productRepository.Get(id));
 
         public async Task<ProductSaveResponseDTO> SaveOrUpdate(ProductSaveDTO productSave)
         {
-            var entity = _mapper.Map<Product>(productSave);
+            Product entity = _mapper.Map<Product>(productSave);
             return _mapper.Map<ProductSaveResponseDTO>(await _productRepository.SaveOrUpdate(entity));
+        }
+
+        public async Task<int> Delete(int i)
+        {
+            Product? entity = await _productRepository.Get(i);
+            return entity is null ? throw new Exception("") : await _productRepository.DeleteAsync(entity);
         }
     }
 }

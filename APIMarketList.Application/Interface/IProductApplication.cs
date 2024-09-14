@@ -8,5 +8,6 @@ namespace APIMarketList.Application.Interface
         Task<List<ProductDTO>> GetProductsAsync();
         Task<ProductDTO?> GetById(long id);
         Task<ProductSaveResponseDTO> SaveOrUpdate(ProductSaveDTO productSave);
+        Task<int> Delete(int i);
     }
 }

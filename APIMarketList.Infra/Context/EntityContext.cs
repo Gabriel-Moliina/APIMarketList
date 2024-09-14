@@ -10,10 +10,13 @@ namespace APIMarketList.Infra.Data.Context
         {
         }
 
-        public Product Products { get; set; }
-        public ShoppingPurchase Shoppings { get; set; }
-        public User Users { get; set; }
-        public ShoppingList ProductShoppings { get; set; }
+        public Group? Groups { get; set; }
+        public Member? Members { get; set; }
+        public Product? Products { get; set; }
+        public ShoppingList? ShoppingLists { get; set; }
+        public ShoppingListItem? ShoppingListItems { get; set; }
+        public ShoppingPurchase? ShoppingPurchases { get; set; }
+        public User? Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

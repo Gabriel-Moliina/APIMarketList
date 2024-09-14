@@ -37,8 +37,9 @@ namespace APIMarketList.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<ResponseViewModel<int>>> Delete(int id)
         {
+            return await ExecuteResponseAsync(() => _productService.Delete(id));
         }
     }
 }
