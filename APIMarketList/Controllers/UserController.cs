@@ -1,4 +1,6 @@
-﻿using APIMarketList.Domain.Interface.Services;
+﻿using APIMarketList.Domain.DTO.User;
+using APIMarketList.Domain.Interface.Services;
+using APIMarketList.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -6,7 +8,7 @@ namespace APIMarketList.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : BaseController
     {
         private readonly IUserService _userService;
         public UserController(IUserService userService)
@@ -15,30 +17,30 @@ namespace APIMarketList.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<ResponseViewModel<IList<UserDTO>>>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await ExecuteResponseAsync(() => _userService.Get());
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<ResponseViewModel<UserDTO>>> Get(int id)
         {
-            return "value";
+            return await ExecuteResponseAsync(() => _userService.GetById(id));
         }
 
+        /// <summary>
+        /// Adiciona ou altera um usuário.
+        /// </summary>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<ResponseViewModel<UserSaveResponseDTO>>> SaveOrUpdate([FromBody] UserSaveDTO userSave)
         {
-        }
-
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
+            return await ExecuteResponseAsync(() => _userService.SaveOrUpdate(userSave));
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<ResponseViewModel<int>>> Delete(int id)
         {
+            return await ExecuteResponseAsync(() => _userService.Delete(id));
         }
     }
 }

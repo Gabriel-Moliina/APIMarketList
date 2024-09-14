@@ -33,7 +33,7 @@ namespace APIMarketList.Application.Application
         public async Task<int> Delete(int i)
         {
             Product? entity = await _productRepository.Get(i);
-            return entity is null ? throw new Exception("") : await _productRepository.DeleteAsync(entity);
+            return entity is null ? throw new Exception("Produto não Encontrado") : await _productRepository.DeleteAsync(entity);
         }
     }
 }

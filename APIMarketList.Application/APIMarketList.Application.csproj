@@ -9,5 +9,5 @@
   <ItemGroup>
     <ProjectReference Include="..\APIMarketList.Domain\APIMarketList.Domain.csproj" />
   </ItemGroup>
-
+	
 </Project>
