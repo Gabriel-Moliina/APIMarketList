@@ -2,6 +2,9 @@
 {
     public class ResponseViewModel<T>
     {
+        public bool Success { get; set; }
+        public string Error { get; set; }
+        public T? Data { get; set; }
         public ResponseViewModel(T Data)
         {
             Success = true;
@@ -12,8 +15,5 @@
             Success = false;
             Error = ex.Message;
         }
-        public bool Success;
-        public string Error;
-        public T? Data { get; set; }
     }
 }

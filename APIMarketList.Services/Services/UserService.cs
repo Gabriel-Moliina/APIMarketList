@@ -1,6 +1,7 @@
 ﻿using APIMarketList.Application.Interface;
 using APIMarketList.Domain.DTO.User;
 using APIMarketList.Domain.Interface.Services;
+using APIMarketList.Infra.CrossCutting.Services;
 using System.Transactions;
 
 namespace APIMarketList.Services.Services

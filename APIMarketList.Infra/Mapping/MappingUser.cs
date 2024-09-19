@@ -24,7 +24,7 @@ namespace APIMarketList.Infra.Data.Mapping
 
             builder.Property<DateTime>("IncludedDate")
                 .HasColumnType("datetime");
-            builder.Property(p => p.ModifiedDate)
+            builder.Property<DateTime>("ModifiedDate")
                 .HasColumnType("datetime");
         }
     }

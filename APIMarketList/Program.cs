@@ -1,7 +1,10 @@
-using APIMarketList.Infra.CrossCutting.Services;
-using APIMarketList.Infra.Data.Context;
+using APIMarketList.Infra.CrossCutting.Cryptography;
+using APIMarketList.Infra.IoC;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 

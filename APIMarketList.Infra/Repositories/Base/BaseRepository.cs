@@ -53,7 +53,7 @@ namespace APIMarketList.Infra.Data.Repositories.Base
         {
             if(entity.Id == 0)
                 _context.Entry(entity).Property("IncludedDate").CurrentValue = DateTime.Now;
-            entity.ModifiedDate = DateTime.Now;
+            _context.Entry(entity).Property("ModifiedDate").CurrentValue = DateTime.Now;
         }
     }
 }

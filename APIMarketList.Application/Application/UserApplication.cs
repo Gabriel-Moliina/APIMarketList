@@ -3,7 +3,10 @@ using APIMarketList.Application.Interface;
 using APIMarketList.Domain.DTO.User;
 using APIMarketList.Domain.Entities;
 using APIMarketList.Domain.Interface.Repositories;
+using APIMarketList.Infra.CrossCutting.Cryptography;
+using APIMarketList.Infra.CrossCutting.Services;
 using AutoMapper;
+using Microsoft.Extensions.Options;
 
 namespace APIMarketList.Application.Application
 {
@@ -11,11 +14,14 @@ namespace APIMarketList.Application.Application
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly EncryptKey _encryptKey;
         public UserApplication(IUserRepository userRepository,
-            IMapper mapper)
+            IMapper mapper,
+            IOptions<EncryptKey> encryptKey)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _encryptKey = encryptKey.Value;
         }
 
         public async Task<IList<UserDTO>> Get() => _mapper.Map<IList<UserDTO>>(await _userRepository.Get());
@@ -24,7 +30,7 @@ namespace APIMarketList.Application.Application
         public async Task<UserSaveResponseDTO> SaveOrUpdate(UserSaveDTO userSaveDTO)
         {
             User entity = _mapper.Map<User>(userSaveDTO);
-            entity.Password = Cryptography.Hash(userSaveDTO.Password);
+            entity.Password = Cryptography.Encrypt(userSaveDTO.Password.Trim(), _encryptKey.Key, _encryptKey.IV);
             return _mapper.Map<UserSaveResponseDTO>(await _userRepository.SaveOrUpdate(entity));
         }
 
