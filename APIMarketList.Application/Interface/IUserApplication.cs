@@ -6,7 +6,7 @@ namespace APIMarketList.Application.Interface
 {
     public interface IUserApplication : IBaseApplication
     {
-        Task<UserSaveResponseDTO> SaveOrUpdate(UserSaveDTO userSaveDTO);
+        Task<UserSaveResponseDTO?> SaveOrUpdate(UserSaveDTO userSaveDTO);
         Task<IList<UserDTO>> Get();
         Task<UserDTO> GetById(int id);
         Task<int> Delete(int id);

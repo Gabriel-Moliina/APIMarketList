@@ -1,4 +1,5 @@
 ﻿using APIMarketList.Domain.DTO.User;
+using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Services;
 using APIMarketList.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ namespace APIMarketList.Controllers
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, INotification notification) : base(notification)
         {
             _userService = userService;
         }

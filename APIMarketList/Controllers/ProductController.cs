@@ -1,4 +1,5 @@
 ﻿using APIMarketList.Domain.DTO.Product;
+using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Services;
 using APIMarketList.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ namespace APIMarketList.Controllers
     public class ProductController : BaseController
     {
         private readonly IProductService _productService;
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, INotification notification) : base(notification)
         {
             _productService = productService;
         }
