@@ -17,7 +17,7 @@ namespace APIMarketList.Domain.Validator.User
                    .WithMessage("Email inválido")
                    .MustAsync(async (model, code, cancellationtoken) =>
                    {
-                       return await _userRepository.Exists(model.Email);
+                       return !(await _userRepository.Exists(model.Email));
                    }).WithMessage("Já existe um usuário cadastrado com este e-mail");
 
             RuleFor(a => a.Password)

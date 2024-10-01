@@ -1,21 +1,25 @@
 ﻿using APIMarketList.Application.Application;
 using APIMarketList.Application.Interface;
+using APIMarketList.Domain.DTO.Authentication;
 using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Repositories;
 using APIMarketList.Domain.Interface.Services;
 using APIMarketList.Domain.Mappers;
 using APIMarketList.Domain.Notification;
+using APIMarketList.Infra.Authentication.Interface;
+using APIMarketList.Infra.Authentication.Services;
 using APIMarketList.Infra.CrossCutting.Cryptography;
 using APIMarketList.Infra.Data.Context;
 using APIMarketList.Infra.Data.Repositories;
 using APIMarketList.Services.Services;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace APIMarketList.Infra.IoC
+namespace APIMarketList.Infra.IoC.IoC
 {
 
     public static class IoC
@@ -67,6 +71,19 @@ namespace APIMarketList.Infra.IoC
             services.AddSingleton<IConfigureOptions<EncryptKey>, EncryptKeyConfigurator>();
             services.AddScoped<INotification, NotificationContext>();
             services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+            return services;
+        }
+
+        public static IServiceCollection ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            });
+
             return services;
         }
     }

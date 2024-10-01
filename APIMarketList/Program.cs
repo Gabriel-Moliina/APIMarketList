@@ -1,5 +1,5 @@
 using APIMarketList.Infra.CrossCutting.Cryptography;
-using APIMarketList.Infra.IoC;
+using APIMarketList.Infra.IoC.IoC;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
@@ -32,6 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

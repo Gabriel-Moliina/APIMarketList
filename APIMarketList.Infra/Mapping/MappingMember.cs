@@ -14,6 +14,9 @@ namespace APIMarketList.Infra.Data.Mapping
 
             builder.Property(p => p.IsAdmin)
                 .HasColumnType("bit");
+            
+            builder.Property(p => p.CanUpdate)
+                .HasColumnType("bit");
 
             builder.HasOne(p => p.Group)
                 .WithMany(d => d.Members)

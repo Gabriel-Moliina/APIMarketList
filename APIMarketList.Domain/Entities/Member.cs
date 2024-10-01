@@ -5,6 +5,7 @@ namespace APIMarketList.Domain.Entities
     public class Member : BaseEntity
     {
         public bool IsAdmin { get; set; }
+        public bool CanUpdate { get; set; }
         public int GroupId { get; set; }
         public int UserId { get; set; }
 

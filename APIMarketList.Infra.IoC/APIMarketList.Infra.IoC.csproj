@@ -8,11 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.33" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\APIMarketList.Infra.Authentication\APIMarketList.Infra.Authentication.csproj" />
     <ProjectReference Include="..\APIMarketList.Infra\APIMarketList.Infra.Data.csproj" />
     <ProjectReference Include="..\APIMarketList.Services\APIMarketList.Services.csproj" />
   </ItemGroup>
