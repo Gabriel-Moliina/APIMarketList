@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\APIMarketList.CrossCutting\APIMarketList.Infra.CrossCutting.csproj" />
     <ProjectReference Include="..\APIMarketList.Domain\APIMarketList.Domain.csproj" />
+    <ProjectReference Include="..\APIMarketList.Infra.Authentication\APIMarketList.Infra.Authentication.csproj" />
   </ItemGroup>
 	
 </Project>

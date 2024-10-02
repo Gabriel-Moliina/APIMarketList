@@ -10,5 +10,6 @@ namespace APIMarketList.Application.Interface
         Task<IList<UserDTO>> Get();
         Task<UserDTO> GetById(int id);
         Task<int> Delete(int id);
+        Task<string> Authenticate(string email, string password);
     }
 }

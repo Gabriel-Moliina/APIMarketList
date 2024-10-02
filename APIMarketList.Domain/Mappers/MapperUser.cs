@@ -9,6 +9,8 @@ namespace APIMarketList.Domain.Mappers
         public MapperUser()
         {
             CreateMap<UserSaveDTO, User>();
+
+            CreateMap<User, UserDTO>();
             CreateMap<User, UserSaveResponseDTO>();
         }
     }

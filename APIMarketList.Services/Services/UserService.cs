@@ -32,5 +32,7 @@ namespace APIMarketList.Services.Services
             transaction.Complete();
             return response;
         }
+
+        public async Task<string> Authenticate(string login, string password) => await _userApplication.Authenticate(login, password);
     }
 }

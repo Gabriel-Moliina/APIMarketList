@@ -2,6 +2,7 @@
 using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Services;
 using APIMarketList.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -32,6 +33,7 @@ namespace APIMarketList.Controllers
         /// <summary>
         /// Adiciona ou altera um usuário.
         /// </summary>
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<ResponseViewModel<UserSaveResponseDTO>>> SaveOrUpdate([FromBody] UserSaveDTO userSave)
         {
@@ -42,6 +44,13 @@ namespace APIMarketList.Controllers
         public async Task<ActionResult<ResponseViewModel<int>>> Delete(int id)
         {
             return await ExecuteResponseAsync(() => _userService.Delete(id));
+        }
+
+        [AllowAnonymous]
+        [HttpPost("Authenticate")]
+        public async Task<ActionResult<ResponseViewModel<string>>> Authenticate(string login, string password)
+        {
+            return await ExecuteResponseAsync(() => _userService.Authenticate(login, password));
         }
     }
 }

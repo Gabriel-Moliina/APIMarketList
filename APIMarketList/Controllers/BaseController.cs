@@ -1,9 +1,11 @@
 ﻿using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIMarketList.Controllers
 {
+    [Authorize]
     public class BaseController : ControllerBase
     {
         private readonly INotification _notification;

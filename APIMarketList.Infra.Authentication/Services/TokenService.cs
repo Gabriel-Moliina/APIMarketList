@@ -1,6 +1,7 @@
 ﻿using APIMarketList.Domain.DTO.Authentication;
 using APIMarketList.Domain.DTO.User;
 using APIMarketList.Infra.Authentication.Interface;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -12,14 +13,17 @@ namespace APIMarketList.Infra.Authentication.Services
     public class TokenService : ITokenService
     {
         private readonly JwtSettings _jwtSettings;
-        public TokenService(IOptions<JwtSettings> jwtSettings)
+        public TokenService(IOptions<JwtSettings> jwtSettings, IConfiguration configuration)
         {
-            _jwtSettings = jwtSettings.Value;
+            _jwtSettings = new JwtSettings{
+                SecretKey = configuration.GetSection("JwtSettings:Secret").Value,
+                ExpirationInMinutes = int.Parse(configuration.GetSection("JwtSettings:ExpirationInMinutes").Value)
+            };
         }
         public string GenerateToken(UserDTO user)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            if (!string.IsNullOrEmpty(_jwtSettings.SecretKey)) 
+            if (string.IsNullOrEmpty(_jwtSettings?.SecretKey)) 
                 throw new ArgumentNullException("Token secret não configurado");
 
             byte[] key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
@@ -39,6 +43,11 @@ namespace APIMarketList.Infra.Authentication.Services
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public string GetSecret()
+        {
+            return _jwtSettings.SecretKey;
         }
     }
 }

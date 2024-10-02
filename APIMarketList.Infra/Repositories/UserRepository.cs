@@ -1,4 +1,5 @@
-﻿using APIMarketList.Domain.Entities;
+﻿using APIMarketList.Domain.DTO.User;
+using APIMarketList.Domain.Entities;
 using APIMarketList.Domain.Interface.Repositories;
 using APIMarketList.Infra.Data.Context;
 using APIMarketList.Infra.Data.Repositories.Base;
@@ -16,6 +17,11 @@ namespace APIMarketList.Infra.Data.Repositories
         {
             var result = await _dbSet.AsNoTracking().AnyAsync(x => x.Email == email);
             return result;
+        }
+
+        public async Task<User?> Login(string email, string password)
+        {
+            return await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
         }
     }
 }
