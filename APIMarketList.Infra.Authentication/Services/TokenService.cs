@@ -33,9 +33,7 @@ namespace APIMarketList.Infra.Authentication.Services
                 Subject = new System.Security.Claims.ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, user.Name),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, nameof(user.CanUpdate)),
-                    new Claim(ClaimTypes.Role, nameof(user.IsAdmin))
+                    new Claim(ClaimTypes.Email, user.Email)
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.ExpirationInMinutes),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

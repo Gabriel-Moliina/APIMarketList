@@ -10,23 +10,16 @@ namespace APIMarketList.Infra.Data.Context
         {
         }
 
-        public Group? Groups { get; set; }
-        public Member? Members { get; set; }
-        public Product? Products { get; set; }
-        public ShoppingList? ShoppingLists { get; set; }
-        public ShoppingListItem? ShoppingListItems { get; set; }
-        public ShoppingPurchase? ShoppingPurchases { get; set; }
-        public User? Users { get; set; }
+        public DbSet<Member> Members { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ShoppingList> ShoppingLists { get; set; }
+        public DbSet<ShoppingListItem> ShoppingListItems { get; set; }
+        public DbSet<ShoppingPurchase> ShoppingPurchases { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new MappingGroup());
-            modelBuilder.ApplyConfiguration(new MappingMember());
-            modelBuilder.ApplyConfiguration(new MappingProduct());
-            modelBuilder.ApplyConfiguration(new MappingShoppingList());
-            modelBuilder.ApplyConfiguration(new MappingShoppingListItem());
-            modelBuilder.ApplyConfiguration(new MappingShoppingPurchase());
-            modelBuilder.ApplyConfiguration(new MappingUser());
+            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
     }
 }

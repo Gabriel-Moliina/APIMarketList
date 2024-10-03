@@ -14,18 +14,11 @@ namespace APIMarketList.Infra.Data.Mapping
             builder.Property(p => p.Description)
                 .HasColumnType("varchar(255)");
 
-            builder.Property(p => p.ListDate)
+            builder.Property(p => p.TargetDate)
                 .HasColumnType("datetime");
-
-            builder.Property(p => p.GroupId)
-                .HasColumnType("int");
 
             builder.Property(p => p.Status)
                 .HasColumnType("int");
-
-            builder.HasOne(p => p.Group)
-                .WithMany(d => d.ShoppingLists)
-                .HasForeignKey(p => p.GroupId);
 
             builder.Property<DateTime>("IncludedDate")
             .   HasColumnType("datetime");

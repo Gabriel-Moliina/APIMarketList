@@ -13,7 +13,7 @@ namespace APIMarketList.Services.Services
             _productApplication = productApplication;
         }
         
-        public async Task<IList<ProductDTO>> Get() => await _productApplication.GetProductsAsync();
+        public async Task<IList<ProductDTO>> Get() => await _productApplication.Get();
         public async Task<ProductDTO?> Get(long id) => await _productApplication.GetById(id);
         public async Task<ProductSaveResponseDTO> SaveOrUpdate(ProductSaveDTO productSave)
         {

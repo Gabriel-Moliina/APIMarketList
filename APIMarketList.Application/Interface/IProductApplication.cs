@@ -5,7 +5,7 @@ namespace APIMarketList.Application.Interface
 {
     public interface IProductApplication : IBaseApplication
     {
-        Task<List<ProductDTO>> GetProductsAsync();
+        Task<List<ProductDTO>> Get();
         Task<ProductDTO?> GetById(long id);
         Task<ProductSaveResponseDTO> SaveOrUpdate(ProductSaveDTO productSave);
         Task<int> Delete(int i);

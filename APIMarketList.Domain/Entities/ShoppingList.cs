@@ -6,14 +6,14 @@ namespace APIMarketList.Domain.Entities
     {
         public ShoppingList()
         {
+            Members = new HashSet<Member>();
             ShoppingListItens = new HashSet<ShoppingListItem>();
         }
         public string? Description { get; set; }
-        public DateTime ListDate { get; set; }  
-        public int GroupId { get; set; }
+        public DateTime TargetDate { get; set; }  
         public int Status { get; set; }
 
-        public virtual Group? Group { get; set; }
+        public ICollection<Member> Members { get; set; }
         public ICollection<ShoppingListItem> ShoppingListItens { get; set; }
     }
 }

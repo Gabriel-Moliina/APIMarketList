@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIMarketList.Infra.Data.Migrations
 {
     [DbContext(typeof(EntityContext))]
-    [Migration("20240911020818_Initial")]
+    [Migration("20241003025058_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,28 +24,6 @@ namespace APIMarketList.Infra.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("APIMarketList.Domain.Entities.Group", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<DateTime>("IncludedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Group", (string)null);
-                });
-
             modelBuilder.Entity("APIMarketList.Domain.Entities.Member", b =>
                 {
                     b.Property<int>("Id")
@@ -54,8 +32,8 @@ namespace APIMarketList.Infra.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
+                    b.Property<bool>("CanUpdate")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("IncludedDate")
                         .HasColumnType("datetime");
@@ -66,12 +44,15 @@ namespace APIMarketList.Infra.Data.Migrations
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime");
 
+                    b.Property<int>("ShoppingListId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupId");
+                    b.HasIndex("ShoppingListId");
 
                     b.HasIndex("UserId");
 
@@ -117,13 +98,7 @@ namespace APIMarketList.Infra.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("IncludedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("ListDate")
                         .HasColumnType("datetime");
 
                     b.Property<DateTime>("ModifiedDate")
@@ -132,9 +107,10 @@ namespace APIMarketList.Infra.Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<DateTime>("TargetDate")
+                        .HasColumnType("datetime");
 
-                    b.HasIndex("GroupId");
+                    b.HasKey("Id");
 
                     b.ToTable("ShoppingList", (string)null);
                 });
@@ -233,9 +209,9 @@ namespace APIMarketList.Infra.Data.Migrations
 
             modelBuilder.Entity("APIMarketList.Domain.Entities.Member", b =>
                 {
-                    b.HasOne("APIMarketList.Domain.Entities.Group", "Group")
+                    b.HasOne("APIMarketList.Domain.Entities.ShoppingList", "ShoppingList")
                         .WithMany("Members")
-                        .HasForeignKey("GroupId")
+                        .HasForeignKey("ShoppingListId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -245,20 +221,9 @@ namespace APIMarketList.Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Group");
+                    b.Navigation("ShoppingList");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("APIMarketList.Domain.Entities.ShoppingList", b =>
-                {
-                    b.HasOne("APIMarketList.Domain.Entities.Group", "Group")
-                        .WithMany("ShoppingLists")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Group");
                 });
 
             modelBuilder.Entity("APIMarketList.Domain.Entities.ShoppingListItem", b =>
@@ -291,13 +256,6 @@ namespace APIMarketList.Infra.Data.Migrations
                     b.Navigation("ShoppingListItem");
                 });
 
-            modelBuilder.Entity("APIMarketList.Domain.Entities.Group", b =>
-                {
-                    b.Navigation("Members");
-
-                    b.Navigation("ShoppingLists");
-                });
-
             modelBuilder.Entity("APIMarketList.Domain.Entities.Product", b =>
                 {
                     b.Navigation("ShoppingListItems");
@@ -305,6 +263,8 @@ namespace APIMarketList.Infra.Data.Migrations
 
             modelBuilder.Entity("APIMarketList.Domain.Entities.ShoppingList", b =>
                 {
+                    b.Navigation("Members");
+
                     b.Navigation("ShoppingListItens");
                 });
 

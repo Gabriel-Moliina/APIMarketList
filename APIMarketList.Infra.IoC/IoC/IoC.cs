@@ -1,11 +1,18 @@
 ﻿using APIMarketList.Application.Application;
 using APIMarketList.Application.Interface;
 using APIMarketList.Domain.DTO.Authentication;
+using APIMarketList.Domain.DTO.Product;
+using APIMarketList.Domain.DTO.ShoppingList;
+using APIMarketList.Domain.DTO.User;
+using APIMarketList.Domain.Entities;
 using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Repositories;
 using APIMarketList.Domain.Interface.Services;
 using APIMarketList.Domain.Mappers;
 using APIMarketList.Domain.Notification;
+using APIMarketList.Domain.Validator.Product;
+using APIMarketList.Domain.Validator.ShoppingList;
+using APIMarketList.Domain.Validator.User;
 using APIMarketList.Infra.Authentication.Interface;
 using APIMarketList.Infra.Authentication.Services;
 using APIMarketList.Infra.CrossCutting.Cryptography;
@@ -14,6 +21,7 @@ using APIMarketList.Infra.Data.Repositories;
 using APIMarketList.Services.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -54,6 +62,7 @@ namespace APIMarketList.Infra.IoC.IoC
         {
             services.AddAutoMapper(typeof(MapperProduct));
             services.AddAutoMapper(typeof(MapperUser));
+            services.AddAutoMapper(typeof(MapperShoppingList));
             return services;
         }
 
@@ -73,7 +82,9 @@ namespace APIMarketList.Infra.IoC.IoC
         {
             services.AddSingleton<IConfigureOptions<EncryptKey>, EncryptKeyConfigurator>();
             services.AddScoped<INotification, NotificationContext>();
-            services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<IValidator<UserSaveDTO>, UserSaveValidator>();
+            services.AddScoped<IValidator<ProductSaveDTO>, ProductSaveValidator>();
+            services.AddScoped<IValidator<ShoppingListSaveDTO>, ShoppingListSaveValidator>();
             return services;
         }
 

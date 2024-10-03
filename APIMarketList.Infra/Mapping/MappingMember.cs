@@ -18,13 +18,13 @@ namespace APIMarketList.Infra.Data.Mapping
             builder.Property(p => p.CanUpdate)
                 .HasColumnType("bit");
 
-            builder.HasOne(p => p.Group)
-                .WithMany(d => d.Members)
-                .HasForeignKey(p => p.GroupId);
-
             builder.HasOne(p => p.User)
                 .WithMany(d => d.Members)
                 .HasForeignKey(p => p.UserId);
+
+            builder.HasOne(p => p.ShoppingList)
+                .WithMany(d => d.Members)
+                .HasForeignKey(p => p.ShoppingListId);
 
             builder.Property<DateTime>("IncludedDate")
                 .HasColumnType("datetime");

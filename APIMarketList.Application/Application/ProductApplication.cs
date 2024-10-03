@@ -20,7 +20,7 @@ namespace APIMarketList.Application.Application
             _productRepository = productRepository;
         }
 
-        public async Task<List<ProductDTO>> GetProductsAsync() => _mapper.Map<List<ProductDTO>>(await _productRepository.Get());
+        public async Task<List<ProductDTO>> Get() => _mapper.Map<List<ProductDTO>>(await _productRepository.Get());
 
         public async Task<ProductDTO?> GetById(long id) => _mapper.Map<ProductDTO>(await _productRepository.Get(id));
 
