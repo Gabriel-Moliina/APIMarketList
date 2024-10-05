@@ -6,5 +6,6 @@ namespace APIMarketList.Infra.Authentication.Interface
     {
         string GenerateToken(UserDTO user);
         string GetSecret();
+        UserDTO GetUser();
     }
 }

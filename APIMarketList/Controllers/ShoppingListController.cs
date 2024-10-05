@@ -34,8 +34,9 @@ namespace APIMarketList.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<ResponseViewModel<ShoppingListDTO>>> Post([FromBody] ShoppingListSaveDTO shoppingList)
         {
+            return await ExecuteResponseAsync(() => _shoppingListService.CreateNew(shoppingList));
         }
 
         [HttpPut("{id}")]

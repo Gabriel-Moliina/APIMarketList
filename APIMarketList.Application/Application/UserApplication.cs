@@ -58,8 +58,15 @@ namespace APIMarketList.Application.Application
         public async Task<string> Authenticate(string email, string password)
         {
             password = Cryptography.Encrypt(password.Trim(), _encryptKey.Key, _encryptKey.IV);
-            UserDTO user = _mapper.Map<UserDTO>(await _userRepository.Login(email, password));
-            return _tokenService.GenerateToken(user);
+            User? user = await _userRepository.Login(email, password);
+
+            if (user is null)
+            {
+                _notification.AddNotification("Usuário", "Usuário não encontrado");
+                return null;
+            }
+
+            return _tokenService.GenerateToken(_mapper.Map<UserDTO>(user));
         }
     }
 }

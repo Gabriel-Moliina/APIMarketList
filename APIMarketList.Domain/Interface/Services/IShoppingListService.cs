@@ -7,5 +7,6 @@ namespace APIMarketList.Domain.Interface.Services
         Task<IList<ShoppingListDTO>> GetAll();
         Task<ShoppingListDTO?> Get(int id);
         Task<IList<ShoppingListDTO>> GetByUser(int userId);
+        Task<ShoppingListDTO> CreateNew(ShoppingListSaveDTO shoppingList);
     }
 }

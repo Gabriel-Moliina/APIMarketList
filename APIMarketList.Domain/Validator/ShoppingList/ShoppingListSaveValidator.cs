@@ -15,9 +15,12 @@ namespace APIMarketList.Domain.Validator.ShoppingList
         public ShoppingListSaveValidator()
         {
 
-            RuleFor(a => a.Description)
-                   .NotEmpty()
-                   .WithMessage("Já existe um usuário cadastrado com este e-mail");
+            RuleFor(a => a.TargetDate)
+                   .Must((model, targetDate) =>
+                   {
+                       return targetDate.Date >= DateTime.UtcNow.Date;
+                   })
+                   .WithMessage("Não é possível cadastrar uma lista com uma data anterior à atual.");
         }
 
     }

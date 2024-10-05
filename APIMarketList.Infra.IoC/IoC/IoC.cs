@@ -21,6 +21,7 @@ using APIMarketList.Infra.Data.Repositories;
 using APIMarketList.Services.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -38,10 +39,10 @@ namespace APIMarketList.Infra.IoC.IoC
         {
             services
                 .RegistryDepedency(configuration)
-                .DbContextDepdency(configuration)
+                .ConfigureAuthentication(configuration)
                 .AddMappers()
-                .ConfigureServices(configuration)
-                .ConfigureAuthentication(configuration);
+                .DbContextDepdency(configuration)
+                .ConfigureServices(configuration);
         }
         public static IServiceCollection RegistryDepedency(this IServiceCollection services, IConfiguration configuration)
         {
@@ -53,7 +54,8 @@ namespace APIMarketList.Infra.IoC.IoC
                 .AddScoped<IShoppingListApplication, ShoppingListApplication>()
                 .AddScoped<IUserRepository, UserRepository>()
                 .AddScoped<IProductRepository, ProductRepository>()
-                .AddScoped<IShoppingListRepository, ShoppingListRepository>();
+                .AddScoped<IShoppingListRepository, ShoppingListRepository>()
+                .AddScoped<IMemberRepository, MemberRepository>();
 
             return services;
         }
@@ -82,6 +84,7 @@ namespace APIMarketList.Infra.IoC.IoC
         {
             services.AddSingleton<IConfigureOptions<EncryptKey>, EncryptKeyConfigurator>();
             services.AddScoped<INotification, NotificationContext>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IValidator<UserSaveDTO>, UserSaveValidator>();
             services.AddScoped<IValidator<ProductSaveDTO>, ProductSaveValidator>();
             services.AddScoped<IValidator<ShoppingListSaveDTO>, ShoppingListSaveValidator>();
