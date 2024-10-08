@@ -7,5 +7,6 @@ namespace APIMarketList.Domain.Interface.Repositories
     {
         Task<bool> Exists(string email);
         Task<User?> Login(string email, string password);
+        Task<User?> GetByEmail(string email);
     }
 }

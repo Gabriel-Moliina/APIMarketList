@@ -1,13 +1,6 @@
-using APIMarketList.Infra.CrossCutting.Cryptography;
 using APIMarketList.Infra.IoC.IoC;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using System.Diagnostics.Metrics;
 using System.Reflection;
-using System.Reflection.Metadata;
-using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 

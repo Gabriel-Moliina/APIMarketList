@@ -10,6 +10,7 @@ namespace APIMarketList.Domain.Mappers
         public MapperShoppingList()
         {
             CreateMap<ShoppingListSaveDTO, ShoppingList>();
+            CreateMap<ShoppingList, ShoppingListDTO>();
         }
     }
 }

@@ -55,7 +55,9 @@ namespace APIMarketList.Infra.IoC.IoC
                 .AddScoped<IUserRepository, UserRepository>()
                 .AddScoped<IProductRepository, ProductRepository>()
                 .AddScoped<IShoppingListRepository, ShoppingListRepository>()
-                .AddScoped<IMemberRepository, MemberRepository>();
+                .AddScoped<IMemberRepository, MemberRepository>()
+                .AddScoped<IMemberApplication, MemberApplication>()
+                .AddScoped<IMemberService, MemberService>();
 
             return services;
         }
@@ -65,6 +67,7 @@ namespace APIMarketList.Infra.IoC.IoC
             services.AddAutoMapper(typeof(MapperProduct));
             services.AddAutoMapper(typeof(MapperUser));
             services.AddAutoMapper(typeof(MapperShoppingList));
+            services.AddAutoMapper(typeof(MapperMember));
             return services;
         }
 
@@ -88,6 +91,7 @@ namespace APIMarketList.Infra.IoC.IoC
             services.AddScoped<IValidator<UserSaveDTO>, UserSaveValidator>();
             services.AddScoped<IValidator<ProductSaveDTO>, ProductSaveValidator>();
             services.AddScoped<IValidator<ShoppingListSaveDTO>, ShoppingListSaveValidator>();
+            services.AddScoped<IValidator<InviteMemberDTO>, InviteMemberValidator>();
             return services;
         }
 

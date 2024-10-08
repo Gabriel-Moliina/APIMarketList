@@ -23,5 +23,7 @@ namespace APIMarketList.Infra.Data.Repositories
         {
             return await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
         }
+
+        public async Task<User?> GetByEmail(string email) => await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Email.Equals(email));
     }
 }

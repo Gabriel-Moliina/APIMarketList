@@ -3,6 +3,7 @@ using APIMarketList.Application.Interface;
 using APIMarketList.Domain.DTO.Product;
 using APIMarketList.Domain.Entities;
 using APIMarketList.Domain.Interface.Entities;
+using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Repositories;
 using AutoMapper;
 using System.Transactions;
@@ -14,7 +15,8 @@ namespace APIMarketList.Application.Application
         private readonly IMapper _mapper;
         private readonly IProductRepository _productRepository;
         public ProductApplication(IProductRepository productRepository, 
-            IMapper mapper)
+            IMapper mapper,
+            INotification notification) : base(mapper, notification)
         {
             _mapper = mapper;
             _productRepository = productRepository;

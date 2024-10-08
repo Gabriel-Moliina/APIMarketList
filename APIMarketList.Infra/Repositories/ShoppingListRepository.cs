@@ -75,5 +75,7 @@ namespace APIMarketList.Infra.Data.Repositories
 
             return await query.ToListAsync();
         }
+
+        public async Task<bool> Exists(int id) => await _dbSet.AnyAsync(x => x.Id == id);
     }
 }

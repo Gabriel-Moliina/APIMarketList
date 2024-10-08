@@ -33,6 +33,9 @@ namespace APIMarketList.Controllers
             return await ExecuteResponseAsync(() => _shoppingListService.GetByUser(userId));
         }
 
+        /// <summary>
+        /// Adiciona ou altera uma lista de compra.
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<ResponseViewModel<ShoppingListDTO>>> Post([FromBody] ShoppingListSaveDTO shoppingList)
         {

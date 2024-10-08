@@ -24,7 +24,7 @@ namespace APIMarketList.Application.Application
             IShoppingListRepository shoppingListRepository,
             IMemberRepository memberRepository,
             ITokenService tokenService
-            )
+            ) : base(mapper, notification)
         {
             _shoppingListRepository = shoppingListRepository;
             _memberRepository = memberRepository;
@@ -34,7 +34,7 @@ namespace APIMarketList.Application.Application
             _tokenService = tokenService;
         }
 
-        public async Task<ShoppingListDTO?> CreateNew(ShoppingListSaveDTO shoppingList)
+        public async Task<ShoppingListDTO> CreateNew(ShoppingListSaveDTO shoppingList)
         {
             _notification.AddNotification(await _validatorSave.ValidateAsync(shoppingList));
             if (_notification.HasNotifications) return null;

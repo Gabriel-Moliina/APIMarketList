@@ -29,5 +29,21 @@ namespace APIMarketList.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, response);
             }
         }
+
+        protected async Task<ActionResult> ExecuteResponseAsync(Func<Task> method)
+        {
+            try
+            {
+                await method();
+                var response = new ResponseVoidViewModel(_notification);
+                var code = response.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
+                return StatusCode(code, response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseVoidViewModel(ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, response);
+            }
+        }
     }
 }

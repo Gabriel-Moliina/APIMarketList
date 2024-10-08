@@ -26,7 +26,7 @@ namespace APIMarketList.Application.Application
             INotification notification,
             IValidator<UserSaveDTO> validator,
             IOptions<EncryptKey> encryptKey,
-            ITokenService tokenService)
+            ITokenService tokenService) : base(mapper, notification)
         {
             _userRepository = userRepository;
             _mapper = mapper;
