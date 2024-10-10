@@ -25,12 +25,13 @@ namespace APIMarketList.Services.Services
             return response;
         }
 
-        public async Task<int> Delete(int id)
+        public async Task Delete(int id)
         {
             using TransactionScope transaction = new(TransactionScopeAsyncFlowOption.Enabled);
-            int response = await _userApplication.Delete(id);
+
+            await _userApplication.Delete(id);
+
             transaction.Complete();
-            return response;
         }
 
         public async Task<string> Authenticate(string login, string password) => await _userApplication.Authenticate(login, password);

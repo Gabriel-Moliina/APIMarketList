@@ -30,7 +30,7 @@ namespace APIMarketList.Controllers
             }
         }
 
-        protected async Task<ActionResult> ExecuteResponseAsync(Func<Task> method)
+        protected async Task<ActionResult<ResponseVoidViewModel>> ExecuteResponseAsync(Func<Task> method)
         {
             try
             {

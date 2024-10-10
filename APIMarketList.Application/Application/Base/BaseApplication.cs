@@ -1,6 +1,6 @@
 ﻿using APIMarketList.Application.Interface.Base;
-using APIMarketList.Domain.Interface.Entities;
 using APIMarketList.Domain.Interface.Notification;
+using APIMarketList.Domain.Interface.Services;
 using AutoMapper;
 
 namespace APIMarketList.Application.Application.Base
@@ -9,11 +9,14 @@ namespace APIMarketList.Application.Application.Base
     {
         protected readonly IMapper _mapper;
         protected readonly INotification _notification;
+        protected readonly ITokenService _tokenService;
         public BaseApplication(IMapper mapper,
-            INotification notification)
+            INotification notification,
+            ITokenService tokenService)
         {                      
             _mapper = mapper;
             _notification = notification;
+            _tokenService = tokenService;
         }
     }
 }

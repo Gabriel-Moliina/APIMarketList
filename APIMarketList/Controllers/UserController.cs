@@ -41,7 +41,7 @@ namespace APIMarketList.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ResponseViewModel<int>>> Delete(int id)
+        public async Task<ActionResult<ResponseVoidViewModel>> Delete(int id)
         {
             return await ExecuteResponseAsync(() => _userService.Delete(id));
         }

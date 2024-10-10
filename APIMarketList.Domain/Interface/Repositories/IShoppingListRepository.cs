@@ -10,5 +10,6 @@ namespace APIMarketList.Domain.Interface.Repositories
         Task<IList<ShoppingListDTO>> GetAll();
         Task<IList<ShoppingListDTO>> GetByUser(int userId);
         Task<bool> Exists(int id);
+        Task<bool> IsUserInShoppingList(int shoppingListId, int userId);
     }
 }

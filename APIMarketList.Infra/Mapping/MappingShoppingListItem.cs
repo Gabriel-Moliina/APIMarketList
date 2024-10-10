@@ -12,13 +12,18 @@ namespace APIMarketList.Infra.Data.Mapping
 
             builder.Property(p => p.Id);
 
+            builder.Property(p => p.Name)
+                .HasColumnType("varchar(255)");
+            
             builder.Property(p => p.Amount)
                 .HasColumnType("int");
 
-            builder.HasOne(p => p.Product)
-                .WithMany(d => d.ShoppingListItems)
-                .HasForeignKey(p => p.ProductId);
-            
+            builder.Property(p => p.Index)
+                .HasColumnType("int");
+
+            builder.Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
+
             builder.HasOne(p => p.ShoppingList)
                 .WithMany(d => d.ShoppingListItens)
                 .HasForeignKey(p => p.ShoppingListId);

@@ -6,14 +6,12 @@ namespace APIMarketList.Domain.Entities
     {
         public ShoppingListItem()
         {
-            ShoppingPurchases = new HashSet<ShoppingPurchase>();
         }
+        public string? Name { get; set; }
+        public decimal Price { get; set; }
         public int Amount { get; set; }
-        public int ProductId { get; set; }
+        public int Index { get; set; }
         public int ShoppingListId { get; set; }
-
-        public virtual Product? Product { get; set; }
         public virtual ShoppingList? ShoppingList { get; set; }
-        public virtual ICollection<ShoppingPurchase> ShoppingPurchases { get; set;}
     }
 }

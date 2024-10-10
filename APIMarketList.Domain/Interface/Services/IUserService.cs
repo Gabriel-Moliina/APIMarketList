@@ -7,7 +7,7 @@ namespace APIMarketList.Domain.Interface.Services
         Task<UserSaveResponseDTO> SaveOrUpdate(UserSaveDTO userSaveDTO);
         Task<IList<UserDTO>> Get();
         Task<UserDTO> GetById(int id);
-        Task<int> Delete(int id);
+        Task Delete(int id);
         Task<string> Authenticate(string login, string password);
     }
 }

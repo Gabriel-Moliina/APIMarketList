@@ -15,8 +15,8 @@ namespace APIMarketList.Controllers
         {
             _memberService = memberService;
         }
-        [HttpPost]
-        public async Task<ActionResult<ResponseViewModel<ShoppingListDTO>>> InviteMember([FromBody] InviteMemberDTO shoppingList)
+        [HttpPost("Invite")]
+        public async Task<ActionResult<ResponseVoidViewModel>> Invite([FromBody] InviteMemberDTO shoppingList)
         {
             return await ExecuteResponseAsync(() => _memberService.InviteMember(shoppingList));
         }

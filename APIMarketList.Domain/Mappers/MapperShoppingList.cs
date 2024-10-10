@@ -1,5 +1,4 @@
-﻿using APIMarketList.Domain.DTO.Product;
-using APIMarketList.Domain.DTO.ShoppingList;
+﻿using APIMarketList.Domain.DTO.ShoppingList;
 using APIMarketList.Domain.Entities;
 using AutoMapper;
 

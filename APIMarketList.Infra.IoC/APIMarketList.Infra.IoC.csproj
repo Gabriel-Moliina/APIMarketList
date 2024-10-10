@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\APIMarketList.Infra.Authentication\APIMarketList.Infra.Authentication.csproj" />
     <ProjectReference Include="..\APIMarketList.Infra\APIMarketList.Infra.Data.csproj" />
     <ProjectReference Include="..\APIMarketList.Services\APIMarketList.Services.csproj" />
   </ItemGroup>

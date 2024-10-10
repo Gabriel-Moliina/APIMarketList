@@ -77,5 +77,13 @@ namespace APIMarketList.Infra.Data.Repositories
         }
 
         public async Task<bool> Exists(int id) => await _dbSet.AnyAsync(x => x.Id == id);
+
+        public async Task<bool> IsUserInShoppingList(int shoppingListId, int userId)
+        {
+            return await _dbSet
+                .Where(x => x.Id == shoppingListId)
+                    .Include(x => x.Members)
+                        .Where(x => x.Members.Any(m => m.UserId == userId)).AnyAsync();
+        }
     }
 }

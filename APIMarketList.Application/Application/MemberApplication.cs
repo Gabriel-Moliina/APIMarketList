@@ -4,6 +4,7 @@ using APIMarketList.Domain.DTO.ShoppingList;
 using APIMarketList.Domain.Entities;
 using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Repositories;
+using APIMarketList.Domain.Interface.Services;
 using AutoMapper;
 using FluentValidation;
 
@@ -18,7 +19,8 @@ namespace APIMarketList.Application.Application
             IUserRepository userRepository,
             IMapper mapper,
             INotification notification,
-            IValidator<InviteMemberDTO> validatorInviteMember) : base(mapper, notification)
+            IValidator<InviteMemberDTO> validatorInviteMember,
+            ITokenService tokenService) : base(mapper, notification, tokenService)
         {
             _memberRepository = memberRepository;
             _userRepository = userRepository;

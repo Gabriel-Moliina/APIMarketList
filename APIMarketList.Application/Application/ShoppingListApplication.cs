@@ -4,7 +4,7 @@ using APIMarketList.Domain.DTO.ShoppingList;
 using APIMarketList.Domain.Entities;
 using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Repositories;
-using APIMarketList.Infra.Authentication.Interface;
+using APIMarketList.Domain.Interface.Services;
 using AutoMapper;
 using FluentValidation;
 
@@ -12,26 +12,20 @@ namespace APIMarketList.Application.Application
 {
     public class ShoppingListApplication : BaseApplication, IShoppingListApplication
     {
-        private readonly INotification _notification;
-        private readonly IMapper _mapper;
         private readonly IShoppingListRepository _shoppingListRepository;
         private readonly IMemberRepository _memberRepository;
         private readonly IValidator<ShoppingListSaveDTO> _validatorSave;
-        private readonly ITokenService _tokenService;
         public ShoppingListApplication(INotification notification,
             IMapper mapper,
             IValidator<ShoppingListSaveDTO> validatorSave,
             IShoppingListRepository shoppingListRepository,
             IMemberRepository memberRepository,
             ITokenService tokenService
-            ) : base(mapper, notification)
+            ) : base(mapper, notification, tokenService)
         {
             _shoppingListRepository = shoppingListRepository;
             _memberRepository = memberRepository;
-            _notification = notification;
-            _mapper = mapper;
             _validatorSave = validatorSave;
-            _tokenService = tokenService;
         }
 
         public async Task<ShoppingListDTO> CreateNew(ShoppingListSaveDTO shoppingList)

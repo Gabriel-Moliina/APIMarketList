@@ -24,7 +24,8 @@ namespace APIMarketList.Infra.Data.Mapping
 
             builder.HasOne(p => p.ShoppingList)
                 .WithMany(d => d.Members)
-                .HasForeignKey(p => p.ShoppingListId);
+                .HasForeignKey(p => p.ShoppingListId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property<DateTime>("IncludedDate")
                 .HasColumnType("datetime");
