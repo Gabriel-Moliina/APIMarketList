@@ -16,14 +16,23 @@ namespace APIMarketList.Services.Services
         public async Task<ShoppingListDTO?> Get(int id) => await _shoppingListApplication.Get(id);
         public async Task<IList<ShoppingListDTO>> GetAll() => await _shoppingListApplication.GetAll();
         public async Task<IList<ShoppingListDTO>> GetByUser(int userId) => await _shoppingListApplication.GetByUser(userId);
-        public async Task<ShoppingListDTO> CreateNew(ShoppingListSaveDTO shoppingList)
+        public async Task<ShoppingListSaveResponseDTO> CreateNew(ShoppingListSaveDTO shoppingList)
         {
             using TransactionScope transaction = new(TransactionScopeAsyncFlowOption.Enabled);
 
-            ShoppingListDTO response = await _shoppingListApplication.CreateNew(shoppingList);
+            ShoppingListSaveResponseDTO response = await _shoppingListApplication.CreateNew(shoppingList);
             transaction.Complete();
 
             return response;
+        }
+        
+        public async Task Delete(int id)
+        {
+            using TransactionScope transaction = new(TransactionScopeAsyncFlowOption.Enabled);
+            
+            await _shoppingListApplication.Delete(id);
+
+            transaction.Complete();
         }
     }
 }

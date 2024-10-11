@@ -14,66 +14,30 @@ namespace APIMarketList.Infra.Data.Repositories
         {
         }
 
-        public async Task<IList<ShoppingListDTO>> GetByUser(int userId)
+        public override async Task<IList<ShoppingList>> Get()
         {
-            var query = (from shoppingList in _dbSet.AsNoTracking()
-                         join members in _context.Members on shoppingList.Id equals members.ShoppingListId
-                         where members.UserId == userId
-                         select new ShoppingListDTO
-                         {
-                             Description = shoppingList.Description,
-                             TargetDate = shoppingList.TargetDate,
-                             Status = shoppingList.Status
-                         });
-
-            return await query.ToListAsync();
+            return await _dbSet.AsNoTracking()
+                .Include(x => x.Members)
+                    .ThenInclude(x => x.User)
+                .Include(x => x.ShoppingListItens)
+                .ToListAsync();
         }
 
-        public async Task<ShoppingListDTO?> Get(int id)
+        public override async Task<ShoppingList?> Get(long id)
         {
-            var query = (from shoppingList in _dbSet.AsNoTracking()
-                         where id == 0 || shoppingList.Id == id
-                         select new ShoppingListDTO
-                         {
-                             Description = shoppingList.Description,
-                             TargetDate = shoppingList.TargetDate,
-                             Status = shoppingList.Status,
-                             Members = (from users in _context.Users.AsNoTracking()
-                                        join members in _context.Members on users.Id equals members.UserId
-                                        where members.ShoppingListId == shoppingList.Id
-                                        select new MemberDTO
-                                        {
-                                            CanUpdate = members.CanUpdate,
-                                            Email = users.Email,
-                                            IsAdmin = members.IsAdmin,
-                                            Name = users.Name
-                                        }).ToList()
-                         });
-
-            return await query.FirstOrDefaultAsync();
+            return await _dbSet.AsNoTracking()
+                .Where(x => x.Id == id)
+                .Include(x => x.Members)
+                    .ThenInclude(x => x.User)
+                .Include(x => x.ShoppingListItens)
+                .FirstOrDefaultAsync();
         }
 
-        public async Task<IList<ShoppingListDTO>> GetAll()
+        public async Task<IList<ShoppingList>> GetByUser(int userId)
         {
-            var query = (from shoppingList in _dbSet.AsNoTracking()
-                         select new ShoppingListDTO
-                         {
-                             Description = shoppingList.Description,
-                             TargetDate = shoppingList.TargetDate,
-                             Status = shoppingList.Status,
-                             Members = (from users in _context.Users.AsNoTracking()
-                                        join members in _context.Members on users.Id equals members.UserId
-                                        where members.ShoppingListId == shoppingList.Id
-                                        select new MemberDTO
-                                        {
-                                            CanUpdate = members.CanUpdate,
-                                            Email = users.Email,
-                                            IsAdmin = members.IsAdmin,
-                                            Name = users.Name
-                                        }).ToList()
-                         });
-
-            return await query.ToListAsync();
+            return await _dbSet.AsNoTracking()
+                .Include(x => x.Members)
+                .Where(x => x.Members.Any(x=>x.UserId == userId)).ToListAsync();
         }
 
         public async Task<bool> Exists(int id) => await _dbSet.AnyAsync(x => x.Id == id);

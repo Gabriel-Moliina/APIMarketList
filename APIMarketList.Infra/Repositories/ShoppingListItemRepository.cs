@@ -15,8 +15,5 @@ namespace APIMarketList.Infra.Data.Repositories
         public ShoppingListItemRepository(EntityContext context) : base(context)
         {
         }
-
-        public async Task<ShoppingListItem?> GetByIndexShoppingListId(int index, int shoppingListId) =>
-            await _dbSet.FirstOrDefaultAsync(x => x.Index == index && x.ShoppingListId == shoppingListId);
     }
 }

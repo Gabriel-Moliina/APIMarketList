@@ -28,7 +28,7 @@ namespace APIMarketList.Application.Application
             _validatorSave = validatorSave;
         }
 
-        public async Task<ShoppingListDTO> CreateNew(ShoppingListSaveDTO shoppingList)
+        public async Task<ShoppingListSaveResponseDTO> CreateNew(ShoppingListSaveDTO shoppingList)
         {
             _notification.AddNotification(await _validatorSave.ValidateAsync(shoppingList));
             if (_notification.HasNotifications) return null;
@@ -44,11 +44,23 @@ namespace APIMarketList.Application.Application
                     ShoppingListId = newEntity.Id,
                 });
 
-            return _mapper.Map<ShoppingListDTO>(newEntity);
+            return _mapper.Map<ShoppingListSaveResponseDTO>(newEntity);
         }
 
-        public async Task<ShoppingListDTO?> Get(int id) => await _shoppingListRepository.Get(id);
-        public async Task<IList<ShoppingListDTO>> GetAll() => await _shoppingListRepository.GetAll();
-        public async Task<IList<ShoppingListDTO>> GetByUser(int userId) => await _shoppingListRepository.GetByUser(userId);
+        public async Task<ShoppingListDTO?> Get(int id) => _mapper.Map<ShoppingListDTO>(await _shoppingListRepository.Get(id));
+        public async Task<IList<ShoppingListDTO>> GetAll() => _mapper.Map<IList<ShoppingListDTO>>(await _shoppingListRepository.Get());
+        public async Task<IList<ShoppingListDTO>> GetByUser(int userId) => _mapper.Map<IList<ShoppingListDTO>>(await _shoppingListRepository.GetByUser(userId));
+        public async Task Delete(int id) {
+
+            ShoppingList? entity = await _shoppingListRepository.Get(id);
+
+            if (entity is null || !await _shoppingListRepository.IsUserInShoppingList(id, _tokenService.GetUser().Id))
+            {
+                _notification.AddNotification("Lista de compra", "Lista de compra não encontrado");
+                return;
+            }
+
+            await _shoppingListRepository.DeleteAsync(entity);
+        }
     }
 }

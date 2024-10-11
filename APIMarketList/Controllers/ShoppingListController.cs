@@ -1,6 +1,7 @@
 ﻿using APIMarketList.Domain.DTO.ShoppingList;
 using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Services;
+using APIMarketList.Services.Services;
 using APIMarketList.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,9 +38,15 @@ namespace APIMarketList.Controllers
         /// Adiciona ou altera uma lista de compra.
         /// </summary>
         [HttpPost]
-        public async Task<ActionResult<ResponseViewModel<ShoppingListDTO>>> Post([FromBody] ShoppingListSaveDTO shoppingList)
+        public async Task<ActionResult<ResponseViewModel<ShoppingListSaveResponseDTO>>> Post([FromBody] ShoppingListSaveDTO shoppingList)
         {
             return await ExecuteResponseAsync(() => _shoppingListService.CreateNew(shoppingList));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ResponseVoidViewModel>> Delete(int id)
+        {
+            return await ExecuteResponseAsync(() => _shoppingListService.Delete(id));
         }
     }
 }

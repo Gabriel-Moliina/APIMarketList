@@ -18,9 +18,6 @@ namespace APIMarketList.Infra.Data.Mapping
             builder.Property(p => p.Amount)
                 .HasColumnType("int");
 
-            builder.Property(p => p.Index)
-                .HasColumnType("int");
-
             builder.Property(p => p.Price)
                 .HasColumnType("decimal(18,2)");
 

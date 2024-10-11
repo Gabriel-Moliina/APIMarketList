@@ -6,9 +6,7 @@ namespace APIMarketList.Domain.Interface.Repositories
 {
     public interface IShoppingListRepository : IBaseRepository<ShoppingList>
     {
-        Task<ShoppingListDTO?> Get(int id);
-        Task<IList<ShoppingListDTO>> GetAll();
-        Task<IList<ShoppingListDTO>> GetByUser(int userId);
+        Task<IList<ShoppingList>> GetByUser(int userId);
         Task<bool> Exists(int id);
         Task<bool> IsUserInShoppingList(int shoppingListId, int userId);
     }

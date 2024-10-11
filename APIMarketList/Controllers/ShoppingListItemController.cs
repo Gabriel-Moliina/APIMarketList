@@ -24,9 +24,9 @@ namespace APIMarketList.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ResponseVoidViewModel>> RemoveItem(ShoppingListItemRemoveDTO removeShoppingListItemDTO)
+        public async Task<ActionResult<ResponseVoidViewModel>> RemoveItem(int id)
         {
-            return await ExecuteResponseAsync(() => _shoppingListItemService.RemoveItem(removeShoppingListItemDTO));
+            return await ExecuteResponseAsync(() => _shoppingListItemService.RemoveItem(id));
         }
     }
 }

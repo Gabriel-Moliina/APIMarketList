@@ -16,11 +16,9 @@ namespace APIMarketList.Application.Application
         private readonly IShoppingListItemRepository _shoppingListItemRepository;
         private readonly IMemberRepository _memberRepository;
         private readonly IValidator<ShoppingListItemSaveDTO> _validatorSave;
-        private readonly IValidator<ShoppingListItemRemoveDTO> _validatorRemove;
         public ShoppingListItemApplication(INotification notification,
             IMapper mapper,
             IValidator<ShoppingListItemSaveDTO> validatorSave,
-            IValidator<ShoppingListItemRemoveDTO> validatorRemove,
             IShoppingListItemRepository shoppingListItemRepository,
             IMemberRepository memberRepository,
             ITokenService tokenService
@@ -29,7 +27,6 @@ namespace APIMarketList.Application.Application
             _shoppingListItemRepository = shoppingListItemRepository;
             _memberRepository = memberRepository;
             _validatorSave = validatorSave;
-            _validatorRemove = validatorRemove;
         }
 
         public async Task AddItem(ShoppingListItemSaveDTO saveShoppingListItemDTO)
@@ -37,16 +34,22 @@ namespace APIMarketList.Application.Application
             _notification.AddNotification(await _validatorSave.ValidateAsync(saveShoppingListItemDTO));
             if (_notification.HasNotifications) return;
 
+            var entity = _mapper.Map<ShoppingListItem>(saveShoppingListItemDTO);
+
             await _shoppingListItemRepository.AddAsync(_mapper.Map<ShoppingListItem>(saveShoppingListItemDTO));
         }
 
-        public async Task RemoveItem(ShoppingListItemRemoveDTO removeShoppingListItemDTO)
+        public async Task RemoveItem(int id)
         {
-            _notification.AddNotification(await _validatorRemove.ValidateAsync(removeShoppingListItemDTO));
-            if (_notification.HasNotifications) return;
+            ShoppingListItem? entity = await _shoppingListItemRepository.Get(id);
 
-            ShoppingListItem? entityDelete = await _shoppingListItemRepository.GetByIndexShoppingListId(removeShoppingListItemDTO.Index, removeShoppingListItemDTO.ShoppingListId);
-            await _shoppingListItemRepository.DeleteAsync(entityDelete);
+            if (entity is null)
+            {
+                _notification.AddNotification("Item", "Item não encontrado");
+                return;
+            }
+
+            await _shoppingListItemRepository.DeleteAsync(entity);
         }
     }
 }

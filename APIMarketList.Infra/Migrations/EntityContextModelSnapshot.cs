@@ -33,8 +33,14 @@ namespace APIMarketList.Infra.Data.Migrations
                     b.Property<bool>("CanUpdate")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime>("IncludedDate")
+                        .HasColumnType("datetime");
+
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime");
 
                     b.Property<int>("ShoppingListId")
                         .HasColumnType("int");
@@ -48,7 +54,7 @@ namespace APIMarketList.Infra.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Members");
+                    b.ToTable("Member", (string)null);
                 });
 
             modelBuilder.Entity("APIMarketList.Domain.Entities.ShoppingList", b =>
@@ -60,17 +66,23 @@ namespace APIMarketList.Infra.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("IncludedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("TargetDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShoppingLists");
+                    b.ToTable("ShoppingList", (string)null);
                 });
 
             modelBuilder.Entity("APIMarketList.Domain.Entities.ShoppingListItem", b =>
@@ -84,11 +96,14 @@ namespace APIMarketList.Infra.Data.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("Index")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("IncludedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -100,7 +115,7 @@ namespace APIMarketList.Infra.Data.Migrations
 
                     b.HasIndex("ShoppingListId");
 
-                    b.ToTable("ShoppingListItems");
+                    b.ToTable("ShoppingListItem", (string)null);
                 });
 
             modelBuilder.Entity("APIMarketList.Domain.Entities.User", b =>
@@ -112,17 +127,23 @@ namespace APIMarketList.Infra.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("IncludedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(80)");
 
                     b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("APIMarketList.Domain.Entities.Member", b =>

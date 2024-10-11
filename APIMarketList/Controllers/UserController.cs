@@ -19,6 +19,7 @@ namespace APIMarketList.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<ResponseViewModel<IList<UserDTO>>>> Get()
         {
             return await ExecuteResponseAsync(() => _userService.Get());

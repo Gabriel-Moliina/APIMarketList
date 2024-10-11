@@ -7,6 +7,6 @@ namespace APIMarketList.Domain.Interface.Repositories
 {
     public interface IShoppingListItemRepository : IBaseRepository<ShoppingListItem>
     {
-        Task<ShoppingListItem?> GetByIndexShoppingListId(int index, int shoppingListId);
+
     }
 }

@@ -76,8 +76,6 @@ namespace APIMarketList.Infra.IoC.IoC
         public static IServiceCollection AddMappers(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(MapperUser));
-            services.AddAutoMapper(typeof(MapperShoppingList));
-            services.AddAutoMapper(typeof(MapperMember));
             return services;
         }
         
@@ -86,7 +84,6 @@ namespace APIMarketList.Infra.IoC.IoC
             services.AddScoped<IValidator<UserSaveDTO>, UserSaveValidator>();
             services.AddScoped<IValidator<ShoppingListSaveDTO>, ShoppingListSaveValidator>();
             services.AddScoped<IValidator<InviteMemberDTO>, InviteMemberValidator>();
-            services.AddScoped<IValidator<ShoppingListItemRemoveDTO>, ShoppingListItemRemoveValidator>();
             services.AddScoped<IValidator<ShoppingListItemSaveDTO>, ShoppingListItemSaveValidator>();
             return services;
         }

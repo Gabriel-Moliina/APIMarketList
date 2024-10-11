@@ -10,60 +10,65 @@ namespace APIMarketList.Infra.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ShoppingLists",
+                name: "ShoppingList",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TargetDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    Description = table.Column<string>(type: "varchar(255)", nullable: true),
+                    TargetDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    IncludedDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShoppingLists", x => x.Id);
+                    table.PrimaryKey("PK_ShoppingList", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "varchar(80)", nullable: true),
+                    Email = table.Column<string>(type: "varchar(255)", nullable: true),
+                    Password = table.Column<string>(type: "varchar(50)", nullable: true),
+                    IncludedDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShoppingListItems",
+                name: "ShoppingListItem",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "varchar(255)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Amount = table.Column<int>(type: "int", nullable: false),
-                    Index = table.Column<int>(type: "int", nullable: false),
-                    ShoppingListId = table.Column<int>(type: "int", nullable: false)
+                    ShoppingListId = table.Column<int>(type: "int", nullable: false),
+                    IncludedDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShoppingListItems", x => x.Id);
+                    table.PrimaryKey("PK_ShoppingListItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ShoppingListItems_ShoppingLists_ShoppingListId",
+                        name: "FK_ShoppingListItem_ShoppingList_ShoppingListId",
                         column: x => x.ShoppingListId,
-                        principalTable: "ShoppingLists",
+                        principalTable: "ShoppingList",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Members",
+                name: "Member",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -71,54 +76,56 @@ namespace APIMarketList.Infra.Data.Migrations
                     IsAdmin = table.Column<bool>(type: "bit", nullable: false),
                     CanUpdate = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    ShoppingListId = table.Column<int>(type: "int", nullable: false)
+                    ShoppingListId = table.Column<int>(type: "int", nullable: false),
+                    IncludedDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Members", x => x.Id);
+                    table.PrimaryKey("PK_Member", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Members_ShoppingLists_ShoppingListId",
+                        name: "FK_Member_ShoppingList_ShoppingListId",
                         column: x => x.ShoppingListId,
-                        principalTable: "ShoppingLists",
+                        principalTable: "ShoppingList",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Members_Users_UserId",
+                        name: "FK_Member_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Members_ShoppingListId",
-                table: "Members",
+                name: "IX_Member_ShoppingListId",
+                table: "Member",
                 column: "ShoppingListId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Members_UserId",
-                table: "Members",
+                name: "IX_Member_UserId",
+                table: "Member",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShoppingListItems_ShoppingListId",
-                table: "ShoppingListItems",
+                name: "IX_ShoppingListItem_ShoppingListId",
+                table: "ShoppingListItem",
                 column: "ShoppingListId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Members");
+                name: "Member");
 
             migrationBuilder.DropTable(
-                name: "ShoppingListItems");
+                name: "ShoppingListItem");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "User");
 
             migrationBuilder.DropTable(
-                name: "ShoppingLists");
+                name: "ShoppingList");
         }
     }
 }
