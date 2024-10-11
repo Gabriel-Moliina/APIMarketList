@@ -12,11 +12,20 @@ namespace APIMarketList.Services.Services
         {
             _memberApplication = memberApplication;
         }
-        public async Task InviteMember(InviteMemberDTO inviteMember)
+        public async Task Invite(InviteMemberDTO inviteMember)
         {
             using TransactionScope transaction = new(TransactionScopeAsyncFlowOption.Enabled);
 
-            await _memberApplication.InviteMember(inviteMember);
+            await _memberApplication.Invite(inviteMember);
+
+            transaction.Complete();
+        }
+
+        public async Task Remove(int shoppingListId, string email)
+        {
+            using TransactionScope transaction = new(TransactionScopeAsyncFlowOption.Enabled);
+
+            await _memberApplication.Remove(shoppingListId, email);
 
             transaction.Complete();
         }

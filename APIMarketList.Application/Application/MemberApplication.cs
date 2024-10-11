@@ -26,7 +26,7 @@ namespace APIMarketList.Application.Application
             _userRepository = userRepository;
             _validatorInviteMember = validatorInviteMember;
         }
-        public async Task InviteMember(InviteMemberDTO inviteMember)
+        public async Task Invite(InviteMemberDTO inviteMember)
         {
             _notification.AddNotification(await _validatorInviteMember.ValidateAsync(inviteMember));
             if (_notification.HasNotifications) return;
@@ -40,6 +40,11 @@ namespace APIMarketList.Application.Application
             };
 
             await _memberRepository.AddAsync(newEntity);
+        }
+        
+        public async Task Remove(int shoppingListId, string email)
+        {
+
         }
     }
 }

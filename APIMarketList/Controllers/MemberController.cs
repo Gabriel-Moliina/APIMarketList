@@ -18,6 +18,11 @@ namespace APIMarketList.Controllers
         [HttpPost("Invite")]
         public async Task<ActionResult<ResponseVoidViewModel>> Invite([FromBody] InviteMemberDTO shoppingList)
         {
+            return await ExecuteResponseAsync(() => _memberService.Invite(shoppingList));
+        }
+        [HttpDelete("Remove")]
+        public async Task<ActionResult<ResponseVoidViewModel>> Remove(int shoppingListId, [FromQuery] string email)
+        {
             return await ExecuteResponseAsync(() => _memberService.InviteMember(shoppingList));
         }
     }

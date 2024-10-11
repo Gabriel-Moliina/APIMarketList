@@ -4,6 +4,7 @@ namespace APIMarketList.Application.Interface
 {
     public interface IMemberApplication
     {
-        Task InviteMember(InviteMemberDTO inviteMember);
+        Task Invite(InviteMemberDTO inviteMember);
+        Task Remove(int shoppingListId, string email);
     }
 }
