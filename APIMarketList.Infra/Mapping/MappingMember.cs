@@ -12,12 +12,6 @@ namespace APIMarketList.Infra.Data.Mapping
 
             builder.Property(p => p.Id);
 
-            builder.Property(p => p.IsAdmin)
-                .HasColumnType("bit");
-            
-            builder.Property(p => p.CanUpdate)
-                .HasColumnType("bit");
-
             builder.HasOne(p => p.User)
                 .WithMany(d => d.Members)
                 .HasForeignKey(p => p.UserId);
@@ -26,6 +20,10 @@ namespace APIMarketList.Infra.Data.Mapping
                 .WithMany(d => d.Members)
                 .HasForeignKey(p => p.ShoppingListId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(p => p.Role)
+                .WithMany(d => d.Members)
+                .HasForeignKey(p => p.RoleId);
 
             builder.Property<DateTime>("IncludedDate")
                 .HasColumnType("datetime");

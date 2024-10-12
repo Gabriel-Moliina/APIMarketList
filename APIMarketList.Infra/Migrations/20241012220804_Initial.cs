@@ -10,6 +10,19 @@ namespace APIMarketList.Infra.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Role",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "varchar(255)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Role", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ShoppingList",
                 columns: table => new
                 {
@@ -73,16 +86,21 @@ namespace APIMarketList.Infra.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IsAdmin = table.Column<bool>(type: "bit", nullable: false),
-                    CanUpdate = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     ShoppingListId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
                     IncludedDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Member", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Member_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Member_ShoppingList_ShoppingListId",
                         column: x => x.ShoppingListId,
@@ -96,6 +114,11 @@ namespace APIMarketList.Infra.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Member_RoleId",
+                table: "Member",
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Member_ShoppingListId",
@@ -120,6 +143,9 @@ namespace APIMarketList.Infra.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ShoppingListItem");
+
+            migrationBuilder.DropTable(
+                name: "Role");
 
             migrationBuilder.DropTable(
                 name: "User");

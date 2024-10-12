@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIMarketList.Infra.Data.Migrations
 {
     [DbContext(typeof(EntityContext))]
-    [Migration("20241011014017_Initial")]
+    [Migration("20241012220804_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,17 +32,14 @@ namespace APIMarketList.Infra.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("CanUpdate")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("IncludedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ShoppingListId")
                         .HasColumnType("int");
@@ -52,11 +49,30 @@ namespace APIMarketList.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RoleId");
+
                     b.HasIndex("ShoppingListId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Member", (string)null);
+                });
+
+            modelBuilder.Entity("APIMarketList.Domain.Entities.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role", (string)null);
                 });
 
             modelBuilder.Entity("APIMarketList.Domain.Entities.ShoppingList", b =>
@@ -150,6 +166,12 @@ namespace APIMarketList.Infra.Data.Migrations
 
             modelBuilder.Entity("APIMarketList.Domain.Entities.Member", b =>
                 {
+                    b.HasOne("APIMarketList.Domain.Entities.Role", "Role")
+                        .WithMany("Members")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("APIMarketList.Domain.Entities.ShoppingList", "ShoppingList")
                         .WithMany("Members")
                         .HasForeignKey("ShoppingListId")
@@ -161,6 +183,8 @@ namespace APIMarketList.Infra.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Role");
 
                     b.Navigation("ShoppingList");
 
@@ -176,6 +200,11 @@ namespace APIMarketList.Infra.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("ShoppingList");
+                });
+
+            modelBuilder.Entity("APIMarketList.Domain.Entities.Role", b =>
+                {
+                    b.Navigation("Members");
                 });
 
             modelBuilder.Entity("APIMarketList.Domain.Entities.ShoppingList", b =>

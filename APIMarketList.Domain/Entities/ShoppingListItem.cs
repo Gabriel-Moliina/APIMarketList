@@ -11,6 +11,6 @@ namespace APIMarketList.Domain.Entities
         public decimal Price { get; set; }
         public int Amount { get; set; }
         public int ShoppingListId { get; set; }
-        public virtual ShoppingList? ShoppingList { get; set; }
+        public ShoppingList? ShoppingList { get; set; }
     }
 }

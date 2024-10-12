@@ -1,6 +1,6 @@
 ﻿using APIMarketList.Domain.DTO.User;
 
-namespace APIMarketList.Domain.Interface.Services
+namespace APIMarketList.Domain.Interface.Service
 {
     public interface ITokenService
     {

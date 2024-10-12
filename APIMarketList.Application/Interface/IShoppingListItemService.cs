@@ -1,9 +1,9 @@
 ﻿using APIMarketList.Domain.DTO.ShoppingList;
 using APIMarketList.Domain.DTO.ShoppingListItem;
 
-namespace APIMarketList.Application.Interface
+namespace APIMarketList.Service.Interface
 {
-    public interface IShoppingListItemApplication
+    public interface IShoppingListItemService
     {
         Task AddItem(ShoppingListItemSaveDTO saveShoppingListItemDTO);
         Task RemoveItem(int id);

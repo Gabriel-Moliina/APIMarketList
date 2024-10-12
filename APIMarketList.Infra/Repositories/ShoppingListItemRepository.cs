@@ -1,12 +1,7 @@
-﻿using APIMarketList.Domain.DTO.Member;
-using APIMarketList.Domain.DTO.ShoppingList;
-using APIMarketList.Domain.DTO.ShoppingListItem;
-using APIMarketList.Domain.Entities;
+﻿using APIMarketList.Domain.Entities;
 using APIMarketList.Domain.Interface.Repositories;
 using APIMarketList.Infra.Data.Context;
 using APIMarketList.Infra.Data.Repositories.Base;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
 
 namespace APIMarketList.Infra.Data.Repositories
 {

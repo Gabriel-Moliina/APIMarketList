@@ -1,7 +1,6 @@
 ﻿using APIMarketList.Domain.DTO.ShoppingListItem;
 using APIMarketList.Domain.Interface.Repositories;
-using APIMarketList.Domain.Interface.Services;
-using APIMarketList.Domain.Services;
+using APIMarketList.Domain.Interface.Service;
 using FluentValidation;
 
 namespace APIMarketList.Domain.Validator.ShoppingListItem

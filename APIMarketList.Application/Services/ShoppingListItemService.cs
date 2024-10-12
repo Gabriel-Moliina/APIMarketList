@@ -1,22 +1,21 @@
 ﻿using APIMarketList.Application.Application.Base;
-using APIMarketList.Application.Interface;
-using APIMarketList.Domain.DTO.ShoppingList;
 using APIMarketList.Domain.DTO.ShoppingListItem;
 using APIMarketList.Domain.Entities;
 using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Repositories;
-using APIMarketList.Domain.Interface.Services;
+using APIMarketList.Domain.Interface.Service;
+using APIMarketList.Service.Interface;
 using AutoMapper;
 using FluentValidation;
 
-namespace APIMarketList.Application.Application
+namespace APIMarketList.Service.Services
 {
-    public class ShoppingListItemApplication : BaseApplication, IShoppingListItemApplication
+    public class ShoppingListItemService : BaseService, IShoppingListItemService
     {
         private readonly IShoppingListItemRepository _shoppingListItemRepository;
         private readonly IMemberRepository _memberRepository;
         private readonly IValidator<ShoppingListItemSaveDTO> _validatorSave;
-        public ShoppingListItemApplication(INotification notification,
+        public ShoppingListItemService(INotification notification,
             IMapper mapper,
             IValidator<ShoppingListItemSaveDTO> validatorSave,
             IShoppingListItemRepository shoppingListItemRepository,

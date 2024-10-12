@@ -1,6 +1,6 @@
 ﻿using APIMarketList.Domain.DTO.Authentication;
 using APIMarketList.Domain.DTO.User;
-using APIMarketList.Domain.Interface.Services;
+using APIMarketList.Domain.Interface.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;

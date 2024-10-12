@@ -1,6 +1,4 @@
-﻿using APIMarketList.Domain.Entities;
-using APIMarketList.Domain.Entities.Base;
-using APIMarketList.Domain.Interface.Entities;
+﻿using APIMarketList.Domain.Entities.Base;
 using APIMarketList.Domain.Interface.Repositories.Base;
 using APIMarketList.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;

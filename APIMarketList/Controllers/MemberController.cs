@@ -1,6 +1,6 @@
 ﻿using APIMarketList.Domain.DTO.ShoppingList;
+using APIMarketList.Domain.Interface.Application;
 using APIMarketList.Domain.Interface.Notification;
-using APIMarketList.Domain.Interface.Services;
 using APIMarketList.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,20 +10,20 @@ namespace APIMarketList.Controllers
     [ApiController]
     public class MemberController : BaseController
     {
-        private readonly IMemberService _memberService;
-        public MemberController(IMemberService memberService, INotification notification) : base(notification)
+        private readonly IMemberApplication _memberApplication;
+        public MemberController(IMemberApplication memberService, INotification notification) : base(notification)
         {
-            _memberService = memberService;
+            _memberApplication = memberService;
         }
         [HttpPost("Invite")]
         public async Task<ActionResult<ResponseVoidViewModel>> Invite([FromBody] InviteMemberDTO shoppingList)
         {
-            return await ExecuteResponseAsync(() => _memberService.Invite(shoppingList));
+            return await ExecuteResponseAsync(() => _memberApplication.Invite(shoppingList));
         }
         [HttpDelete("Remove")]
         public async Task<ActionResult<ResponseVoidViewModel>> Remove(int shoppingListId, [FromQuery] string email)
         {
-            return await ExecuteResponseAsync(() => _memberService.InviteMember(shoppingList));
+            return await ExecuteResponseAsync(() => _memberApplication.Remove(shoppingListId, email));
         }
     }
 }

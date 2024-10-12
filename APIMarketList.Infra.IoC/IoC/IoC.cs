@@ -1,11 +1,11 @@
 ﻿using APIMarketList.Application.Application;
-using APIMarketList.Application.Interface;
 using APIMarketList.Domain.DTO.ShoppingList;
 using APIMarketList.Domain.DTO.ShoppingListItem;
 using APIMarketList.Domain.DTO.User;
+using APIMarketList.Domain.Interface.Application;
 using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Repositories;
-using APIMarketList.Domain.Interface.Services;
+using APIMarketList.Domain.Interface.Service;
 using APIMarketList.Domain.Mappers;
 using APIMarketList.Domain.Notification;
 using APIMarketList.Domain.Services;
@@ -15,7 +15,8 @@ using APIMarketList.Domain.Validator.User;
 using APIMarketList.Infra.CrossCutting.Cryptography;
 using APIMarketList.Infra.Data.Context;
 using APIMarketList.Infra.Data.Repositories;
-using APIMarketList.Services.Services;
+using APIMarketList.Service.Interface;
+using APIMarketList.Service.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
@@ -68,7 +69,8 @@ namespace APIMarketList.Infra.IoC.IoC
             services.AddScoped<IUserRepository, UserRepository>()
                 .AddScoped<IShoppingListRepository, ShoppingListRepository>()
                 .AddScoped<IMemberRepository, MemberRepository>()
-                .AddScoped<IShoppingListItemRepository, ShoppingListItemRepository>();
+                .AddScoped<IShoppingListItemRepository, ShoppingListItemRepository>()
+                .AddScoped<IRoleRepository, RoleRepository>();
 
             return services;
         }
@@ -96,6 +98,7 @@ namespace APIMarketList.Infra.IoC.IoC
 
             using var serviceScope = services.BuildServiceProvider().CreateScope();
             serviceScope.ServiceProvider.GetRequiredService<EntityContext>().Database.EnsureCreated();
+            serviceScope.ServiceProvider.GetRequiredService<EntityContext>().Seed();
 
             return services;
         }

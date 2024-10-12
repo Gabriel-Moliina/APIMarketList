@@ -1,22 +1,24 @@
 ﻿using APIMarketList.Application.Application.Base;
-using APIMarketList.Application.Interface;
 using APIMarketList.Domain.DTO.ShoppingList;
 using APIMarketList.Domain.Entities;
 using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Repositories;
-using APIMarketList.Domain.Interface.Services;
+using APIMarketList.Domain.Interface.Service;
+using APIMarketList.Service.Interface;
 using AutoMapper;
 using FluentValidation;
 
-namespace APIMarketList.Application.Application
+namespace APIMarketList.Service.Services
 {
-    public class MemberApplication : BaseApplication, IMemberApplication
+    public class MemberService : BaseService, IMemberService
     {
         private readonly IMemberRepository _memberRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
         private readonly IValidator<InviteMemberDTO> _validatorInviteMember;
-        public MemberApplication(IMemberRepository memberRepository,
+        public MemberService(IMemberRepository memberRepository,
             IUserRepository userRepository,
+            IRoleRepository roleRepository,
             IMapper mapper,
             INotification notification,
             IValidator<InviteMemberDTO> validatorInviteMember,
@@ -31,12 +33,14 @@ namespace APIMarketList.Application.Application
             _notification.AddNotification(await _validatorInviteMember.ValidateAsync(inviteMember));
             if (_notification.HasNotifications) return;
 
-            User? user = await _userRepository.GetByEmail(inviteMember.MemberEmail);
+            User user = await _userRepository.GetByEmail(inviteMember.MemberEmail);
+            Role role = await _roleRepository.GetByName(inviteMember.RoleName);
+
             Member newEntity = new()
             {
-                CanUpdate = inviteMember.CanUpdate,
                 UserId = user.Id,
-                ShoppingListId = inviteMember.ShoppingListId
+                ShoppingListId = inviteMember.ShoppingListId,
+                RoleId = role.Id,
             };
 
             await _memberRepository.AddAsync(newEntity);

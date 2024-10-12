@@ -1,8 +1,8 @@
 ﻿using APIMarketList.Domain.DTO.ShoppingList;
 
-namespace APIMarketList.Application.Interface
+namespace APIMarketList.Service.Interface
 {
-    public interface IMemberApplication
+    public interface IMemberService
     {
         Task Invite(InviteMemberDTO inviteMember);
         Task Remove(int shoppingListId, string email);

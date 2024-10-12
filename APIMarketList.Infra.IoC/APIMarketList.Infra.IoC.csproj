@@ -14,8 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\APIMarketList.Application\APIMarketList.Service.csproj" />
+    <ProjectReference Include="..\APIMarketList.Domain\APIMarketList.Domain.csproj" />
     <ProjectReference Include="..\APIMarketList.Infra\APIMarketList.Infra.Data.csproj" />
-    <ProjectReference Include="..\APIMarketList.Services\APIMarketList.Services.csproj" />
+    <ProjectReference Include="..\APIMarketList.Services\APIMarketList.Application.csproj" />
   </ItemGroup>
 
 </Project>

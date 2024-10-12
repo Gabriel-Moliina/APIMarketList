@@ -1,6 +1,4 @@
-﻿using APIMarketList.Domain.DTO.Member;
-using APIMarketList.Domain.DTO.ShoppingList;
-using APIMarketList.Domain.Entities;
+﻿using APIMarketList.Domain.Entities;
 using APIMarketList.Domain.Interface.Repositories;
 using APIMarketList.Infra.Data.Context;
 using APIMarketList.Infra.Data.Repositories.Base;

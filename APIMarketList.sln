@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Domain", "1-Domain", "{E3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Infra", "2-Infra", "{6C223D57-79CD-486C-99D8-E0E8C7C0323B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Services", "3-Services", "{6854A19B-C60E-48ED-B8BF-85556E9826DF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Application", "3-Application", "{6854A19B-C60E-48ED-B8BF-85556E9826DF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Application", "4-Application", "{740ABD04-B2BE-4D30-80C8-F6E2119178A1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Service", "4-Service", "{740ABD04-B2BE-4D30-80C8-F6E2119178A1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5-API", "5-API", "{7DE8BE67-E5CE-4F34-8029-4239B23FD22F}"
 EndProject
@@ -21,9 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIMarketList.Infra.Data", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIMarketList.Infra.CrossCutting", "APIMarketList.CrossCutting\APIMarketList.Infra.CrossCutting.csproj", "{E04574FB-0A49-4A8C-AC44-193D781B364B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIMarketList.Services", "APIMarketList.Services\APIMarketList.Services.csproj", "{2FA61B11-78C2-4F6A-8BEC-963BF8BBE05C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIMarketList.Application", "APIMarketList.Services\APIMarketList.Application.csproj", "{2FA61B11-78C2-4F6A-8BEC-963BF8BBE05C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIMarketList.Application", "APIMarketList.Application\APIMarketList.Application.csproj", "{9CCE8C5B-5C7A-446E-B547-DF8806C26EA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIMarketList.Service", "APIMarketList.Application\APIMarketList.Service.csproj", "{9CCE8C5B-5C7A-446E-B547-DF8806C26EA7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIMarketList.Infra.IoC", "APIMarketList.Infra.IoC\APIMarketList.Infra.IoC.csproj", "{AEE41B23-C595-47AD-A69D-B81AA865E8F4}"
 EndProject

@@ -1,24 +1,24 @@
 ﻿using APIMarketList.Application.Application.Base;
-using APIMarketList.Application.Interface;
 using APIMarketList.Domain.DTO.User;
 using APIMarketList.Domain.Entities;
 using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Repositories;
-using APIMarketList.Domain.Interface.Services;
+using APIMarketList.Domain.Interface.Service;
 using APIMarketList.Infra.CrossCutting.Cryptography;
 using APIMarketList.Infra.CrossCutting.Services;
+using APIMarketList.Service.Interface;
 using AutoMapper;
 using FluentValidation;
 using Microsoft.Extensions.Options;
 
-namespace APIMarketList.Application.Application
+namespace APIMarketList.Service.Services
 {
-    public class UserApplication : BaseApplication, IUserApplication
+    public class UserService : BaseService, IUserService
     {
         private readonly IUserRepository _userRepository;
         private readonly EncryptKey _encryptKey;
         private readonly IValidator<UserSaveDTO> _validator;
-        public UserApplication(IUserRepository userRepository,
+        public UserService(IUserRepository userRepository,
             IMapper mapper,
             INotification notification,
             IValidator<UserSaveDTO> validator,
