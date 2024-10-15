@@ -22,7 +22,6 @@ namespace APIMarketList.Controllers
             return await ExecuteResponseAsync(() => _memberApplication.Invite(shoppingList));
         }
         [HttpDelete("Remove")]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ResponseBaseViewModel>> Remove(int memberId)
         {
             return await ExecuteResponseAsync(() => _memberApplication.Remove(memberId));

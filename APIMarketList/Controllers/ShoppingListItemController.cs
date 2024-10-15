@@ -25,7 +25,6 @@ namespace APIMarketList.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ResponseBaseViewModel>> RemoveItem(int id)
         {
             return await ExecuteResponseAsync(() => _shoppingListItemApplication.RemoveItem(id));

@@ -44,7 +44,6 @@ namespace APIMarketList.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ResponseBaseViewModel>> Delete(int id)
         {
             return await ExecuteResponseAsync(() => _shoppingListApplication.Delete(id));
