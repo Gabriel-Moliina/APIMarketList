@@ -7,10 +7,9 @@ namespace APIMarketList.Domain.Entities
     {
         public int UserId { get; set; }
         public int ShoppingListId { get; set; }
-        public int RoleId { get; set; }
+        public bool IsAdmin { get; set; }
 
         public User? User { get; set; }
         public ShoppingList? ShoppingList { get; set; }
-        public Role? Role { get; set; }
     }
 }

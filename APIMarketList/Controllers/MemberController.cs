@@ -21,10 +21,10 @@ namespace APIMarketList.Controllers
         {
             return await ExecuteResponseAsync(() => _memberApplication.Invite(shoppingList));
         }
-        [HttpDelete("Remove")]
-        public async Task<ActionResult<ResponseBaseViewModel>> Remove(int memberId)
+        [HttpDelete("shoppinglist/{shoppingListId}/member/{memberId}")]
+        public async Task<ActionResult<ResponseBaseViewModel>> Remove(int shoppingListId, int memberId)
         {
-            return await ExecuteResponseAsync(() => _memberApplication.Remove(memberId));
+            return await ExecuteResponseAsync(() => _memberApplication.Remove(shoppingListId, memberId));
         }
     }
 }

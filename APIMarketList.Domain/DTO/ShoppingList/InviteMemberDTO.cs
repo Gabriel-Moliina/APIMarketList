@@ -4,6 +4,5 @@
     {
         public int ShoppingListId { get; set; }
         public string? MemberEmail { get; set; }
-        public string? RoleName { get; set; }
     }
 }

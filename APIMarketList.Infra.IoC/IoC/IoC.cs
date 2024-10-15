@@ -26,6 +26,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using APIMarketList.Domain.Interface.Services;
 
 namespace APIMarketList.Infra.IoC.IoC
 {
@@ -69,8 +70,7 @@ namespace APIMarketList.Infra.IoC.IoC
             services.AddScoped<IUserRepository, UserRepository>()
                 .AddScoped<IShoppingListRepository, ShoppingListRepository>()
                 .AddScoped<IMemberRepository, MemberRepository>()
-                .AddScoped<IShoppingListItemRepository, ShoppingListItemRepository>()
-                .AddScoped<IRoleRepository, RoleRepository>();
+                .AddScoped<IShoppingListItemRepository, ShoppingListItemRepository>();
 
             return services;
         }
@@ -87,6 +87,7 @@ namespace APIMarketList.Infra.IoC.IoC
             services.AddScoped<IValidator<ShoppingListSaveDTO>, ShoppingListSaveValidator>();
             services.AddScoped<IValidator<InviteMemberDTO>, InviteMemberValidator>();
             services.AddScoped<IValidator<ShoppingListItemSaveDTO>, ShoppingListItemSaveValidator>();
+            services.AddScoped<IValidator<ShoppingListItemPurchaseDTO>, ShoppingListItemPurchaseValidator>();
             return services;
         }
 
@@ -98,16 +99,18 @@ namespace APIMarketList.Infra.IoC.IoC
 
             using var serviceScope = services.BuildServiceProvider().CreateScope();
             serviceScope.ServiceProvider.GetRequiredService<EntityContext>().Database.EnsureCreated();
-            serviceScope.ServiceProvider.GetRequiredService<EntityContext>().Seed();
 
             return services;
         }
 
         public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<IConfigureOptions<EncryptKey>, EncryptKeyConfigurator>();
             services.AddScoped<INotification, NotificationContext>();
+            services.AddScoped<IMemberServiceValidate, MemberServiceValidate>();
+
+            services.AddSingleton<IConfigureOptions<EncryptKey>, EncryptKeyConfigurator>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             return services;
         }
 

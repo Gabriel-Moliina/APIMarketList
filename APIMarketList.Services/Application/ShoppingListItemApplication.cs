@@ -21,11 +21,11 @@ namespace APIMarketList.Application.Application
             transaction.Complete();
         }
 
-        public async Task RemoveItem(int id)
+        public async Task RemoveItem(int shoppingListId, int id)
         {
             using TransactionScope transaction = new(TransactionScopeAsyncFlowOption.Enabled);
 
-            await _shoppingListItemService.RemoveItem(id);
+            await _shoppingListItemService.RemoveItem(shoppingListId, id);
             transaction.Complete();
         }
     }

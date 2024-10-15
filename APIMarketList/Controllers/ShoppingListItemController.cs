@@ -18,16 +18,22 @@ namespace APIMarketList.Controllers
             _shoppingListItemApplication = shoppingListService;
         }
 
-        [HttpPost("AddItem")]
+        [HttpPost("Add")]
         public async Task<ActionResult<ResponseBaseViewModel>> AddItem([FromBody] ShoppingListItemSaveDTO shoppingListItem)
         {
             return await ExecuteResponseAsync(() => _shoppingListItemApplication.AddItem(shoppingListItem));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ResponseBaseViewModel>> RemoveItem(int id)
+        [HttpPost("Buy")]
+        public async Task<ActionResult<ResponseBaseViewModel>> Buy([FromBody] ShoppingListItemSaveDTO shoppingListItem)
         {
-            return await ExecuteResponseAsync(() => _shoppingListItemApplication.RemoveItem(id));
+            return await ExecuteResponseAsync(() => _shoppingListItemApplication.AddItem(shoppingListItem));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ResponseBaseViewModel>> RemoveItem(int shoppingListId, int id)
+        {
+            return await ExecuteResponseAsync(() => _shoppingListItemApplication.RemoveItem(shoppingListId, id));
         }
     }
 }

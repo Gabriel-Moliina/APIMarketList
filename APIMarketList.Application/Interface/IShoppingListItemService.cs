@@ -6,6 +6,6 @@ namespace APIMarketList.Service.Interface
     public interface IShoppingListItemService
     {
         Task AddItem(ShoppingListItemSaveDTO saveShoppingListItemDTO);
-        Task RemoveItem(int id);
+        Task RemoveItem(int shoppingListId, int id);
     }
 }

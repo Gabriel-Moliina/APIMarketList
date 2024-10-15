@@ -5,6 +5,6 @@ namespace APIMarketList.Service.Interface
     public interface IMemberService
     {
         Task Invite(InviteMemberDTO inviteMember);
-        Task Remove(int memberId);
+        Task Remove(int shoppingListId, int memberId);
     }
 }
