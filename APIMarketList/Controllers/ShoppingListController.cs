@@ -1,8 +1,9 @@
 ﻿using APIMarketList.Domain.DTO.ShoppingList;
-using APIMarketList.Domain.Interface.Application;
+using APIMarketList.Application.Interface;
 using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace APIMarketList.Controllers
 {
@@ -43,7 +44,8 @@ namespace APIMarketList.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ResponseVoidViewModel>> Delete(int id)
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ResponseBaseViewModel>> Delete(int id)
         {
             return await ExecuteResponseAsync(() => _shoppingListApplication.Delete(id));
         }

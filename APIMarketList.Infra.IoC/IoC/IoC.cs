@@ -2,7 +2,7 @@
 using APIMarketList.Domain.DTO.ShoppingList;
 using APIMarketList.Domain.DTO.ShoppingListItem;
 using APIMarketList.Domain.DTO.User;
-using APIMarketList.Domain.Interface.Application;
+using APIMarketList.Application.Interface;
 using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Repositories;
 using APIMarketList.Domain.Interface.Service;

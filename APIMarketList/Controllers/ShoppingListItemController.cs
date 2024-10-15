@@ -1,8 +1,9 @@
 ﻿using APIMarketList.Domain.DTO.ShoppingListItem;
-using APIMarketList.Domain.Interface.Application;
+using APIMarketList.Application.Interface;
 using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace APIMarketList.Controllers
 {
@@ -18,13 +19,14 @@ namespace APIMarketList.Controllers
         }
 
         [HttpPost("AddItem")]
-        public async Task<ActionResult<ResponseVoidViewModel>> AddItem([FromBody] ShoppingListItemSaveDTO shoppingListItem)
+        public async Task<ActionResult<ResponseBaseViewModel>> AddItem([FromBody] ShoppingListItemSaveDTO shoppingListItem)
         {
             return await ExecuteResponseAsync(() => _shoppingListItemApplication.AddItem(shoppingListItem));
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ResponseVoidViewModel>> RemoveItem(int id)
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ResponseBaseViewModel>> RemoveItem(int id)
         {
             return await ExecuteResponseAsync(() => _shoppingListItemApplication.RemoveItem(id));
         }

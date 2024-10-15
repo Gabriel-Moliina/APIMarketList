@@ -1,5 +1,5 @@
 ﻿using APIMarketList.Domain.DTO.ShoppingList;
-using APIMarketList.Domain.Interface.Application;
+using APIMarketList.Application.Interface;
 using APIMarketList.Service.Interface;
 using System.Transactions;
 

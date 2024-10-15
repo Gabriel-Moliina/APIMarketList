@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIMarketList.Infra.Data.Migrations
 {
     [DbContext(typeof(EntityContext))]
-    [Migration("20241012220804_Initial")]
+    [Migration("20241015001656_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

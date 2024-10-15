@@ -1,6 +1,6 @@
 ﻿using APIMarketList.Domain.DTO.ShoppingListItem;
 
-namespace APIMarketList.Domain.Interface.Application
+namespace APIMarketList.Application.Interface
 {
     public interface IShoppingListItemApplication
     {

@@ -1,5 +1,5 @@
 ﻿using APIMarketList.Domain.DTO.ShoppingList;
-using APIMarketList.Domain.Interface.Application;
+using APIMarketList.Application.Interface;
 using APIMarketList.Service.Interface;
 using System.Transactions;
 
@@ -21,11 +21,11 @@ namespace APIMarketList.Application.Application
             transaction.Complete();
         }
 
-        public async Task Remove(int shoppingListId, string email)
+        public async Task Remove(int memberId)
         {
             using TransactionScope transaction = new(TransactionScopeAsyncFlowOption.Enabled);
 
-            await _memberService.Remove(shoppingListId, email);
+            await _memberService.Remove(memberId);
 
             transaction.Complete();
         }

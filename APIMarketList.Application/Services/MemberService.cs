@@ -1,12 +1,14 @@
 ﻿using APIMarketList.Application.Application.Base;
 using APIMarketList.Domain.DTO.ShoppingList;
 using APIMarketList.Domain.Entities;
+using APIMarketList.Domain.Interface.Entities;
 using APIMarketList.Domain.Interface.Notification;
 using APIMarketList.Domain.Interface.Repositories;
 using APIMarketList.Domain.Interface.Service;
 using APIMarketList.Service.Interface;
 using AutoMapper;
 using FluentValidation;
+using System.Transactions;
 
 namespace APIMarketList.Service.Services
 {
@@ -46,9 +48,17 @@ namespace APIMarketList.Service.Services
             await _memberRepository.AddAsync(newEntity);
         }
         
-        public async Task Remove(int shoppingListId, string email)
+        public async Task Remove(int memberId)
         {
+            Member? member = await _memberRepository.Get(memberId);
 
+            if (member is null)
+            {
+                _notification.AddNotification("Membro", "Membero não encontrado");
+                return;
+            }
+
+            await _memberRepository.DeleteAsync(member);
         }
     }
 }

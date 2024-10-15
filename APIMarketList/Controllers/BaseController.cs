@@ -19,7 +19,9 @@ namespace APIMarketList.Controllers
             try
             {
                 var responseData = await method();
-                var response = new ResponseViewModel<T>(_notification, responseData);
+                var response = new ResponseViewModel<T>(_notification);
+                response.SetData(responseData);
+
                 var code = response.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
                 return StatusCode(code, response);
             }
@@ -30,18 +32,18 @@ namespace APIMarketList.Controllers
             }
         }
 
-        protected async Task<ActionResult<ResponseVoidViewModel>> ExecuteResponseAsync(Func<Task> method)
+        protected async Task<ActionResult<ResponseBaseViewModel>> ExecuteResponseAsync(Func<Task> method)
         {
             try
             {
                 await method();
-                var response = new ResponseVoidViewModel(_notification);
+                var response = new ResponseBaseViewModel(_notification);
                 var code = response.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
                 return StatusCode(code, response);
             }
             catch (Exception ex)
             {
-                var response = new ResponseVoidViewModel(ex);
+                var response = new ResponseBaseViewModel(ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, response);
             }
         }

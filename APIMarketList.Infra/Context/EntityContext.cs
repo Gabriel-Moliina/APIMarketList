@@ -24,6 +24,7 @@ namespace APIMarketList.Infra.Data.Context
             if (!Roles.Any(r => r.Name == "Admin")) Roles.Add(new Role { Name = "Admin" });
             if (!Roles.Any(r => r.Name == "Observer")) Roles.Add(new Role { Name = "Observer" });
             if (!Roles.Any(r => r.Name == "Moderator")) Roles.Add(new Role { Name = "Moderator" });
+            SaveChanges();
         }
     }
 }

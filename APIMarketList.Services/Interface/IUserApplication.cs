@@ -1,6 +1,6 @@
 ﻿using APIMarketList.Domain.DTO.User;
 
-namespace APIMarketList.Domain.Interface.Application
+namespace APIMarketList.Application.Interface
 {
     public interface IUserApplication
     {
