@@ -18,18 +18,18 @@ namespace APIMarketList.Domain.Validator.ShoppingListItem
             RuleFor(x => x.ShoppingListItemId)
                 .NotEmpty()
                 .NotEqual(0)
-                .MustAsync(async (model, code, cancellationtoken) =>
+                .MustAsync(async (model, shoppingListItemId, cancellationtoken) =>
                 {
-                    return (await _shoppingListItemRepository.Get(model.ShoppingListItemId) != null);
+                    return (await _shoppingListItemRepository.Get(shoppingListItemId) != null);
                 }).WithMessage("Item não encontrado");
 
             RuleFor(x => x.Amount)
                 .NotEmpty()
                 .NotEqual(0)
-                .MustAsync(async (model, code, cancellationtoken) =>
+                .MustAsync(async (model, amount, cancellationtoken) =>
                 {
                     var item = await _shoppingListItemRepository.Get(model.ShoppingListItemId);
-                    return !((item?.Amount - model.Amount) < 0);
+                    return !((item?.Amount - amount) < 0);
 
                 }).WithMessage("Quantidade inválida para o item selecionado");
         }

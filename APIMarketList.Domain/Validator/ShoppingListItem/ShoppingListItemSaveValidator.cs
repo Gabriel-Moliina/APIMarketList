@@ -24,16 +24,16 @@ namespace APIMarketList.Domain.Validator.ShoppingListItem
             RuleFor(x => x.ShoppingListId)
                 .NotEmpty()
                 .NotEqual(0)
-                .MustAsync(async (model, code, cancellationtoken) =>
+                .MustAsync(async (model, shoppingListItemId, cancellationtoken) =>
                 {
-                    return (await _shoppingListRepository.IsUserInShoppingList(model.ShoppingListId, _tokenService.GetUser().Id));
+                    return (await _shoppingListRepository.IsUserInShoppingList(shoppingListItemId, _tokenService.GetUser().Id));
                 }).WithMessage("Lista de compra não encontrada");
 
             RuleFor(x => x.Amount)
                 .NotEmpty()
                 .NotEqual(0)
                 .WithMessage("Quantidade inválida para o item selecionado")
-                .MustAsync(async (model, code, cancellationtoken) =>
+                .MustAsync(async (model, amount, cancellationtoken) =>
                 {
                     return (await _shoppingListRepository.Exists(model.ShoppingListId));
                 }).WithMessage("Item não encontrado");

@@ -18,11 +18,11 @@ namespace APIMarketList.Domain.Validator.ShoppingList
                 .NotEmpty()
                 .EmailAddress()
                 .WithMessage("Email inválido")
-                .MustAsync(async (model, code, cancellationtoken) =>
+                .MustAsync(async (model, memberEmail, cancellationtoken) =>
                 {
-                    return (await _userRepository.Exists(model.MemberEmail));
+                    return (await _userRepository.Exists(memberEmail));
                 }).WithMessage("O e-mail informado não foi encontrado")
-                .MustAsync(async (model, code, cancellationtoken) =>
+                .MustAsync(async (model, memberEmail, cancellationtoken) =>
                 {
                     return (await _shoppingListRepository.Exists(model.ShoppingListId));
                 }).WithMessage("A lista de compra não foi encontrada");
