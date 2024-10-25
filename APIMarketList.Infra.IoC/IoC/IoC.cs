@@ -27,6 +27,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using APIMarketList.Domain.Interface.Services;
+using APIMarketList.Infra.Data.Caching;
 
 namespace APIMarketList.Infra.IoC.IoC
 {
@@ -99,6 +100,17 @@ namespace APIMarketList.Infra.IoC.IoC
 
             using var serviceScope = services.BuildServiceProvider().CreateScope();
             serviceScope.ServiceProvider.GetRequiredService<EntityContext>().Database.EnsureCreated();
+
+            return services;
+        }
+
+        public static IServiceCollection ConfigureCaching(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddScoped<ICachingService, CachingService>();
+            services.AddStackExchangeRedisCache(o => {
+                o.InstanceName = "instance";
+                o.Configuration = "redis-16110.c308.sa-east-1-1.ec2.redns.redis-cloud.com:16110";
+            });
 
             return services;
         }
