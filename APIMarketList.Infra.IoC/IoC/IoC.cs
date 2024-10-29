@@ -44,6 +44,7 @@ namespace APIMarketList.Infra.IoC.IoC
                 .ConfigureAuthentication(configuration)
                 .AddMappers()
                 .AddValidators()
+                .ConfigureCaching(configuration)
                 .ConfigureServices(configuration);
         }
         public static IServiceCollection RegistryDepedencyServices(this IServiceCollection services, IConfiguration configuration)
@@ -109,7 +110,7 @@ namespace APIMarketList.Infra.IoC.IoC
             services.AddScoped<ICachingService, CachingService>();
             services.AddStackExchangeRedisCache(o => {
                 o.InstanceName = "instance";
-                o.Configuration = "redis-16110.c308.sa-east-1-1.ec2.redns.redis-cloud.com:16110";
+                o.Configuration = configuration.GetConnectionString("Redis");
             });
 
             return services;

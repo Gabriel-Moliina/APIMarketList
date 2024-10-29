@@ -8,6 +8,9 @@ using APIMarketList.Domain.Interface.Services;
 using APIMarketList.Service.Interface;
 using AutoMapper;
 using FluentValidation;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace APIMarketList.Service.Services
 {
@@ -17,19 +20,23 @@ namespace APIMarketList.Service.Services
         private readonly IMemberRepository _memberRepository;
         private readonly IValidator<ShoppingListSaveDTO> _validatorSave;
         private readonly IMemberServiceValidate _memberServiceValidate;
+        private readonly ICachingService _cachingService;
+
         public ShoppingListService(INotification notification,
             IMapper mapper,
             IValidator<ShoppingListSaveDTO> validatorSave,
             IShoppingListRepository shoppingListRepository,
             IMemberRepository memberRepository,
             ITokenService tokenService,
-            IMemberServiceValidate memberServiceValidate
+            IMemberServiceValidate memberServiceValidate,
+            ICachingService cachingService
             ) : base(mapper, notification, tokenService)
         {
             _shoppingListRepository = shoppingListRepository;
             _memberRepository = memberRepository;
             _validatorSave = validatorSave;
             _memberServiceValidate = memberServiceValidate;
+            _cachingService = cachingService;
         }
 
         public async Task<ShoppingListSaveResponseDTO> CreateNew(ShoppingListSaveDTO shoppingList)
@@ -52,8 +59,18 @@ namespace APIMarketList.Service.Services
 
         public async Task<ShoppingListDTO?> Get(int id) => _mapper.Map<ShoppingListDTO>(await _shoppingListRepository.Get(id));
         public async Task<IList<ShoppingListDTO>> GetAll() => _mapper.Map<IList<ShoppingListDTO>>(await _shoppingListRepository.Get());
-        public async Task<IList<ShoppingListDTO>> GetByUser(int userId) => _mapper.Map<IList<ShoppingListDTO>>(await _shoppingListRepository.GetByUser(userId));
-        public async Task Delete(int id) {
+        public async Task<IList<ShoppingListDTO>?> GetByUser(int userId)
+        {
+            string keyGetByUserCaching = $"{nameof(ShoppingList)}:User:{userId}";
+
+            return await _cachingService.GetOrCreate(keyGetByUserCaching, async () =>
+            {
+                var response = await _shoppingListRepository.GetByUser(userId);
+                return _mapper.Map<IList<ShoppingListDTO>>(response);
+            });
+        }
+        public async Task Delete(int id)
+        {
 
             ShoppingList? entity = await _shoppingListRepository.Get(id);
 
