@@ -1,4 +1,12 @@
-Projeto pessoal utilizando os conceitos de DDD e Repository Pattern.
+Este é um projeto pessoal que desenvolve uma Web API destinada à criação de listas de compras. O objetivo é facilitar a organização de compras para eventos ou para uso diário. A API permite que os usuários:
+- Definam um prazo para a lista de compras.
+- Especifiquem os produtos que precisam.
+- Adicionem outros usuários para colaborar na lista.
 
-A API consistem em gerenciar listas de compras de um grupo de usuários, podendo organizar o que deverá comparar para eventos, festas ou até mesmo para casa.
-O Objetivo da API é integrar com uma página WEB ou Mobile para que possa ver as alterações acontecendo simultaneamente através de WebSocket
+Tecnologias Utilizadas:
+- .NET.
+- DDD (Domain-Driven Design).
+- Repository Pattern.
+- Notification Pattern.
+- Entity Framework.
+- Cache com Redis.
